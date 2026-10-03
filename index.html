@@ -59,6 +59,10 @@ body.menu-open{
   overflow:hidden;
 }
 
+body.modal-open{
+  overflow:hidden;
+}
+
 a{
   text-decoration:none;
   color:inherit;
@@ -553,16 +557,9 @@ input{
 
 .character{
   position:relative;
-  min-height:310px;
-
-  padding:30px;
-
   border:1px solid var(--line);
-  background:
-  linear-gradient(145deg,#111720,#0b0f14);
-
+  background:#0b0f14;
   overflow:hidden;
-
   cursor:pointer;
   transition:.3s;
 }
@@ -572,15 +569,35 @@ input{
   border-color:rgba(211,174,98,.45);
 }
 
-.initial{
+.character-image{
+  position:relative;
+  aspect-ratio:4 / 5;
+  overflow:hidden;
+  background:#080b10;
+}
+
+.character-image::after{
+  content:"";
   position:absolute;
-  right:-5px;
-  top:-30px;
+  inset:45% 0 0;
+  background:linear-gradient(transparent,rgba(7,9,13,.9));
+  pointer-events:none;
+}
 
-  font-family:Georgia,serif;
-  font-size:170px;
+.character-image img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .55s ease;
+}
 
-  color:rgba(255,255,255,.025);
+.character:hover .character-image img{
+  transform:scale(1.025);
+}
+
+.character-content{
+  padding:22px 24px 25px;
 }
 
 .character-role{
@@ -592,24 +609,22 @@ input{
 
 .character h3{
   font-family:Georgia,serif;
-  font-size:29px;
-
-  margin-top:15px;
+  font-size:23px;
+  line-height:1.15;
+  margin-top:10px;
 }
 
 .character p{
-  margin-top:15px;
+  margin-top:13px;
   color:var(--muted);
-  font-size:14px;
+  font-size:13px;
 }
 
 .character-footer{
-  position:absolute;
-  bottom:25px;
-  left:30px;
-
-  color:#777f89;
+  margin-top:18px;
+  color:var(--gold);
   font-size:12px;
+  letter-spacing:1px;
 }
 
 /* ================= ROOM 217 ================= */
@@ -864,13 +879,14 @@ footer{
   z-index:2000;
 
   display:none;
-  align-items:center;
+  align-items:flex-start;
   justify-content:center;
 
   background:rgba(0,0,0,.82);
   backdrop-filter:blur(12px);
 
-  padding:20px;
+  padding:40px 20px;
+  overflow-y:auto;
 }
 
 .modal.active{
@@ -880,15 +896,39 @@ footer{
 .modal-box{
   max-width:610px;
   width:100%;
-
   background:#10161e;
   border:1px solid rgba(211,174,98,.3);
-
-  padding:40px;
-
   position:relative;
-
+  overflow:hidden;
   animation:modal .25s ease;
+}
+
+.modal-box.has-image{
+  max-width:1120px;
+  display:grid;
+  grid-template-columns:minmax(330px,.9fr) minmax(360px,1.1fr);
+}
+
+.modal-visual{
+  display:none;
+  background:#080b10;
+}
+
+.modal-box.has-image .modal-visual{
+  display:block;
+}
+
+.modal-visual img{
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:620px;
+  object-fit:cover;
+  object-position:top center;
+}
+
+.modal-content{
+  padding:42px;
 }
 
 @keyframes modal{
@@ -912,7 +952,7 @@ footer{
 
   color:#999;
   font-size:25px;
-
+  z-index:3;
   cursor:pointer;
 }
 
@@ -931,6 +971,16 @@ footer{
 
 .modal p{
   color:#aeb5be;
+}
+
+.modal-quote{
+  margin-top:22px;
+  padding-left:18px;
+  border-left:1px solid var(--gold);
+  color:#d3c5aa;
+  font-family:Georgia,serif;
+  font-size:18px;
+  font-style:italic;
 }
 
 .modal-details{
@@ -990,6 +1040,18 @@ footer{
   .characters,
   .chapter-grid{
     grid-template-columns:repeat(2,1fr);
+  }
+
+  .modal-box.has-image{
+    grid-template-columns:1fr;
+    max-width:720px;
+  }
+
+  .modal-visual img{
+    height:auto;
+    min-height:0;
+    max-height:72vh;
+    object-fit:contain;
   }
 }
 
@@ -1057,6 +1119,22 @@ footer{
 
   .mata-panel{
     padding:25px;
+  }
+
+  .modal{
+    padding:15px;
+  }
+
+  .modal-content{
+    padding:30px 24px;
+  }
+
+  .modal h2{
+    font-size:34px;
+  }
+
+  .modal-details{
+    grid-template-columns:1fr;
   }
 
   .beds{
@@ -1915,18 +1993,27 @@ footer{
       ×
     </button>
 
-    <div
-      class="modal-role"
-      id="modalRole">
+    <div class="modal-visual" id="modalVisual">
+      <img id="modalImage" src="" alt="">
     </div>
 
-    <h2 id="modalName"></h2>
+    <div class="modal-content">
+      <div
+        class="modal-role"
+        id="modalRole">
+      </div>
 
-    <p id="modalDescription"></p>
+      <h2 id="modalName"></h2>
 
-    <div
-      class="modal-details"
-      id="modalDetails">
+      <p id="modalDescription"></p>
+
+      <div class="modal-quote" id="modalQuote"></div>
+
+      <div
+        class="modal-details"
+        id="modalDetails">
+      </div>
+
     </div>
 
   </div>
@@ -1946,146 +2033,212 @@ const characters = [
     short:"Faiz",
     category:"student",
     role:"Mahasiswa • Mahawangsa",
+    image:"assets/characters/faiz-arsyad.png",
+    quote:"Bukan semua jawapan perlu dicari dengan suara yang kuat.",
     description:
-      "Watak utama yang kelihatan terlalu santai untuk seseorang yang dipilih Niskala. Faiz jarang cuba menonjolkan diri, tetapi sering melihat masalah daripada sudut yang tidak dipertimbangkan oleh orang lain.",
+      "Watak utama Niskala yang kelihatan terlalu tenang untuk seseorang yang dipilih oleh institusi itu. Jarang cuba menonjolkan diri, tetapi sering melihat masalah dari sudut yang tidak difikirkan orang lain.",
     details:{
+      Umur:"21",
+      Status:"Pelajar Niskala",
       Kampus:"Mahawangsa",
       Bilik:"217",
+      Sifat:"Pemerhati • Analitikal • Tenang",
       Mata:"4",
-      Sifat:"Santai • Pemerhati",
-      Status:"Pelajar Baharu",
       Catatan:"Dalam pemerhatian Niskala sebelum pencalonan"
     }
   },
 
   {
-    name:"Harith",
+    name:"Harith Zaim bin Rahman",
     short:"Harith",
     category:"student",
     role:"Mahasiswa • Mahawangsa",
+    image:"assets/characters/harith-zaim.png",
+    quote:"Perkara kecil kadang-kadang menyimpan jalan keluar yang paling besar.",
     description:
       "Rakan sebilik Faiz yang tenang dan tidak banyak bercakap. Dalam simulasi Metropoli, Harith mengingati satu butiran kecil daripada gambar yang pernah ditunjukkan Prof. Zaizul.",
     details:{
+      Umur:"21",
+      Status:"Pelajar Niskala",
       Kampus:"Mahawangsa",
       Bilik:"217",
-      Sifat:"Tenang • Teliti",
-      Status:"Pelajar Baharu",
+      Sifat:"Teliti • Pendiam • Berfokus",
       Pemerhatian:"Ingatan visual luar biasa",
       Catatan:"Keupayaan sebenar belum diketahui"
     }
   },
 
   {
-    name:"Danish",
+    name:"Danish Raiyyan bin Safuan",
     short:"Danish",
     category:"student",
     role:"Mahasiswa • Mahawangsa",
+    image:"assets/characters/danish-raiyyan.png",
+    quote:"Kadang-kadang benda rosak cuma tunggu orang yang faham cara ia bernafas.",
     description:
       "Rakan sebilik Faiz yang spontan dan mudah mesra. Beberapa tindakan kecil menunjukkan dia mempunyai pemahaman semula jadi terhadap struktur dan benda mekanikal.",
     details:{
+      Umur:"21",
+      Status:"Pelajar Niskala",
       Kampus:"Mahawangsa",
       Bilik:"217",
-      Sifat:"Spontan • Selamba",
-      Status:"Pelajar Baharu",
+      Sifat:"Spontan • Mesra • Praktikal",
       Pemerhatian:"Cenderung memahami mekanikal",
       Catatan:"Sangat menghargai ayam kafeteria"
     }
   },
 
   {
-    name:"Dr. Zafran",
+    name:"Dr. Zafran Hakimi bin Iskandar",
     short:"Zafran",
     category:"staff",
     role:"Pensyarah • Alumni Niskala",
+    image:"assets/characters/dr-zafran.png",
+    quote:"Ada rahsia yang lebih selamat jika hanya tinggal di dalam kepala.",
     description:
       "Pensyarah universiti lama Faiz dan bekas mahasiswa Niskala. Selepas menyedari bahawa Faiz mengetahui sesuatu yang sepatutnya tersembunyi, dia cuba mencalonkan Faiz kepada Niskala.",
     details:{
-      Status:"Alumni Niskala",
+      Umur:"44",
+      Status:"Pensyarah Universiti",
+      Sifat:"Berhati-hati • Cerdik • Tertekan",
       Hubungan:"Pensyarah Faiz",
       Pencalonan:"Ditolak oleh sistem",
       Mesej:"Calon telah berada dalam pemerhatian",
-      Rahsia:"Hubungan dengan Azlina",
-      Catatan:"Dia melihat terlalu banyak"
+      Rahsia:"Hubungan sulit dengan Azlina"
     }
   },
 
   {
-    name:"Prof. Zaizul",
+    name:"Prof. Zaizul Azman bin Salleh",
     short:"Zaizul",
     category:"staff",
     role:"Profesor • Niskala",
+    image:"assets/characters/prof-zaizul.png",
+    quote:"Saya tidak mencari jawapan yang paling cepat. Saya mencari cara fikir yang paling jujur.",
     description:
       "Pensyarah yang menerangkan sejarah Niskala dan kemudian memberikan simulasi Bangunan Metropoli kepada pelajar daripada lima kampus.",
     details:{
+      Umur:"58",
+      Status:"Profesor Niskala",
+      Sifat:"Intelektual • Tenang • Menilai",
       Institusi:"Niskala",
-      Peranan:"Pensyarah",
       Aktiviti:"Simulasi Metropoli",
       MarkahFaiz:"96 / 100",
-      Prinsip:"Cara berfikir lebih penting daripada hafalan",
-      Status:"Aktif"
+      Prinsip:"Cara berfikir lebih penting daripada hafalan"
     }
   },
 
   {
-    name:"Arman",
+    name:"Arman Firdaus bin Halim",
     short:"Arman",
     category:"student",
     role:"Mahasiswa • Tuah",
+    image:"assets/characters/arman-firdaus.png",
+    quote:"Kalau jalan itu wujud, kita cari. Kalau tak wujud, kita bina pilihan terbaik.",
     description:
       "Ahli kumpulan Faiz dalam simulasi Metropoli. Cepat bertindak dan cenderung mencari penyelesaian yang boleh dilaksanakan dengan segera.",
     details:{
+      Umur:"21",
+      Status:"Pelajar Niskala",
       Kampus:"Tuah",
       Aktiviti:"Simulasi Metropoli",
       Kumpulan:"Faiz • Harith • Danish • Nadhira",
-      Sifat:"Pantas • Praktikal",
-      Status:"Pelajar Niskala"
+      Sifat:"Yakin • Proaktif • Cepat bertindak"
     }
   },
 
   {
-    name:"Nadhira",
+    name:"Nadhira Sofea binti Mahfuz",
     short:"Nadhira",
     category:"student",
     role:"Mahasiswa • Inderaputera",
+    image:"assets/characters/nadhira-sofea.png",
+    quote:"Ketelitian bukan kelewatan. Ketelitian ialah cara kita mengelakkan kesilapan daripada menjadi bencana.",
     description:
       "Ahli kumpulan Faiz dalam simulasi Metropoli. Lebih tenang dan berhati-hati ketika menilai setiap pilihan yang dicadangkan oleh kumpulan.",
     details:{
+      Umur:"21",
+      Status:"Pelajar Niskala",
       Kampus:"Inderaputera",
       Aktiviti:"Simulasi Metropoli",
       Kumpulan:"Faiz • Harith • Danish • Arman",
-      Sifat:"Tenang • Analitikal",
-      Status:"Pelajar Niskala"
+      Sifat:"Tenang • Analitikal • Berhemat"
     }
   },
 
   {
-    name:"Hakim",
+    name:"Hakim Aiman bin Rosli",
     short:"Hakim",
     category:"student",
     role:"Rakan Universiti Lama",
+    image:"assets/characters/hakim-aiman.png",
+    quote:"Kalau peluang besar datang, aku takkan pura-pura tak nampak.",
     description:
       "Rakan Faiz sebelum Niskala. Hakim pernah bergurau bahawa dia akan meninggalkan universitinya jika diberi peluang memasuki Niskala.",
     details:{
+      Umur:"21",
+      Status:"Mahasiswa Universiti",
       Institusi:"Universiti lama Faiz",
       Hubungan:"Rakan Faiz",
-      Status:"Mahasiswa",
+      Sifat:"Ramah • Banyak cakap • Spontan",
       Pengetahuan:"Mengenali reputasi Niskala",
       Catatan:"Sering mempersoalkan perangai Faiz"
     }
   },
 
   {
-    name:"Iqbal",
+    name:"Iqbal Haziq bin Zulkarnain",
     short:"Iqbal",
     category:"student",
     role:"Rakan Universiti Lama",
+    image:"assets/characters/iqbal-haziq.png",
+    quote:"Kadang-kadang nama besar lebih menakutkan daripada perkara yang kita benar-benar faham.",
     description:
       "Seorang lagi rakan Faiz sebelum Niskala. Iqbal antara individu yang memperkenalkan perbualan tentang reputasi Niskala sebelum Faiz menerima surat.",
     details:{
+      Umur:"21",
+      Status:"Mahasiswa Universiti",
       Institusi:"Universiti lama Faiz",
       Hubungan:"Rakan Faiz",
-      Status:"Mahasiswa",
+      Sifat:"Rasional • Tenang • Pemerhati",
       Catatan:"Mengenali reputasi alumni Niskala"
+    }
+  },
+
+  {
+    name:"Mia Adalika binti Zulkifli",
+    short:"Mia",
+    category:"student",
+    role:"Mahasiswa • Niskala",
+    image:"assets/characters/mia-adalika.png",
+    quote:"Peraturan wujud supaya manusia tidak hilang arah apabila keadaan mula retak.",
+    description:
+      "Seorang pelajar yang tegas, tersusun dan memiliki aura kepimpinan yang kuat. Mia melihat dunia dengan disiplin, tanggungjawab dan ketepatan yang sukar dipertikaikan.",
+    details:{
+      Umur:"21",
+      Status:"Pelajar Niskala",
+      Institusi:"Niskala",
+      Sifat:"Tegas • Berdisiplin • Berwibawa",
+      Pemerhatian:"Memiliki aura kepimpinan yang kuat"
+    }
+  },
+
+  {
+    name:"Azlina Nadia binti Rahman",
+    short:"Azlina",
+    category:"staff",
+    role:"Staf Akademik • Fakulti Ekonomi",
+    image:"assets/characters/azlina-nadia.png",
+    quote:"Kadangkala, yang kita mahu hanya kepastian, bukan janji kosong.",
+    description:
+      "Azlina kelihatan yakin dan profesional, namun di sebalik ketegasan itu dia juga rapuh apabila melibatkan perasaan. Dia tahu apa yang dimahukan dan tidak lagi mahu berada dalam hubungan yang samar tanpa arah.",
+    details:{
+      Umur:"34",
+      Status:"Staf Akademik",
+      Institusi:"Fakulti Ekonomi",
+      Sifat:"Matang • Ekspresif • Tegas • Realistik",
+      Hubungan:"Terlibat dalam hubungan sulit dengan Dr. Zafran",
+      Catatan:"Mencari kepastian dan tidak mahu dipermainkan"
     }
   }
 
@@ -2160,7 +2313,8 @@ function renderCharacters(){
 
     const matchesSearch =
       character.name.toLowerCase().includes(query) ||
-      character.role.toLowerCase().includes(query);
+      character.role.toLowerCase().includes(query) ||
+      character.description.toLowerCase().includes(query);
 
     return matchesCategory && matchesSearch;
 
@@ -2173,26 +2327,36 @@ function renderCharacters(){
     document.createElement("article");
 
     card.className = "character";
+    card.tabIndex = 0;
+    card.setAttribute("role","button");
+    card.setAttribute("aria-label",`Buka profil ${character.name}`);
 
     card.innerHTML = `
-      <div class="initial">
-        ${character.short.charAt(0)}
+      <div class="character-image">
+        <img
+          src="${character.image}"
+          alt="Potret ${character.name}"
+          loading="lazy"
+          decoding="async"
+        >
       </div>
 
-      <div class="character-role">
-        ${character.role}
-      </div>
+      <div class="character-content">
+        <div class="character-role">
+          ${character.role}
+        </div>
 
-      <h3>
-        ${character.name}
-      </h3>
+        <h3>
+          ${character.name}
+        </h3>
 
-      <p>
-        ${character.description}
-      </p>
+        <p>
+          ${character.description}
+        </p>
 
-      <div class="character-footer">
-        BUKA FAIL →
+        <div class="character-footer">
+          BUKA DOSSIER →
+        </div>
       </div>
     `;
 
@@ -2200,6 +2364,13 @@ function renderCharacters(){
       "click",
       ()=>openCharacter(character)
     );
+
+    card.addEventListener("keydown",event=>{
+      if(event.key === "Enter" || event.key === " "){
+        event.preventDefault();
+        openCharacter(character);
+      }
+    });
 
     characterGrid.appendChild(card);
 
@@ -2250,6 +2421,23 @@ document
 
 function openCharacter(character){
 
+  const modalBox =
+  document.querySelector(".modal-box");
+
+  modalBox.classList.add("has-image");
+
+  const modalImage =
+  document.getElementById("modalImage");
+
+  modalImage.src = character.image;
+  modalImage.alt = `Dossier visual ${character.name}`;
+
+  const modalQuote =
+  document.getElementById("modalQuote");
+
+  modalQuote.textContent = `“${character.quote}”`;
+  modalQuote.hidden = false;
+
   document
   .getElementById("modalRole")
   .textContent =
@@ -2289,6 +2477,8 @@ function openCharacter(character){
   .getElementById("modal")
   .classList.add("active");
 
+  document.body.classList.add("modal-open");
+
 }
 
 
@@ -2297,6 +2487,8 @@ function closeModal(){
   document
   .getElementById("modal")
   .classList.remove("active");
+
+  document.body.classList.remove("modal-open");
 
 }
 
@@ -2320,6 +2512,16 @@ function showCampus(name){
 
   const campus =
   campusInfo[name];
+
+  document
+  .querySelector(".modal-box")
+  .classList.remove("has-image");
+
+  const modalQuote =
+  document.getElementById("modalQuote");
+
+  modalQuote.textContent = "";
+  modalQuote.hidden = true;
 
   document
   .getElementById("modalRole")
@@ -2354,6 +2556,8 @@ function showCampus(name){
   document
   .getElementById("modal")
   .classList.add("active");
+
+  document.body.classList.add("modal-open");
 
 }
 
