@@ -1,0 +1,2442 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NISKALA — Arkib Rasmi</title>
+
+<style>
+/* =========================
+   NISKALA WEBSITE
+   ========================= */
+
+:root{
+  --bg:#07090d;
+  --bg2:#0d1118;
+  --panel:#111720;
+  --panel2:#151d28;
+  --line:rgba(255,255,255,.09);
+  --text:#f3f0e8;
+  --muted:#9ca5b2;
+  --gold:#d3ae62;
+  --gold2:#8e6b32;
+  --white:#ffffff;
+
+  --tuah:#aa3946;
+  --mahawangsa:#334b7d;
+  --indera:#6d537e;
+  --malim:#84623c;
+  --sulung:#536a5c;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:
+  Inter,
+  "Segoe UI",
+  Arial,
+  sans-serif;
+
+  background:
+    radial-gradient(circle at 20% 0%,rgba(211,174,98,.08),transparent 32%),
+    linear-gradient(180deg,#06080b 0%,#090d12 45%,#06080b 100%);
+
+  color:var(--text);
+  line-height:1.6;
+}
+
+body.menu-open{
+  overflow:hidden;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+/* ================= NAV ================= */
+
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:72px;
+  z-index:1000;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 6%;
+
+  background:rgba(6,8,11,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  font-family:Georgia,serif;
+  letter-spacing:5px;
+  font-weight:bold;
+}
+
+.brand-mark{
+  width:34px;
+  height:34px;
+  border:1px solid var(--gold);
+  border-radius:50%;
+
+  display:grid;
+  place-items:center;
+
+  color:var(--gold);
+}
+
+.nav-links{
+  display:flex;
+  gap:27px;
+  font-size:13px;
+  color:#c0c5cd;
+}
+
+.nav-links a{
+  transition:.25s;
+}
+
+.nav-links a:hover{
+  color:var(--gold);
+}
+
+.menu-btn{
+  display:none;
+  background:none;
+  border:none;
+  color:white;
+  font-size:24px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+
+  position:relative;
+  overflow:hidden;
+
+  padding:120px 8% 80px;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  right:-120px;
+  top:160px;
+
+  width:550px;
+  height:550px;
+
+  border:1px solid rgba(211,174,98,.12);
+  border-radius:50%;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  right:30px;
+  top:310px;
+
+  width:250px;
+  height:250px;
+
+  border:1px solid rgba(211,174,98,.18);
+  transform:rotate(45deg);
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:850px;
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:5px;
+  font-size:12px;
+  text-transform:uppercase;
+  margin-bottom:22px;
+}
+
+.hero h1{
+  font-family:Georgia,serif;
+  font-weight:400;
+
+  font-size:clamp(70px,13vw,160px);
+  line-height:.82;
+
+  letter-spacing:-3px;
+}
+
+.hero h1 span{
+  color:var(--gold);
+}
+
+.hero-subtitle{
+  margin-top:35px;
+  max-width:610px;
+
+  font-size:18px;
+  color:#b7bec7;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:40px;
+}
+
+.btn{
+  padding:14px 22px;
+
+  border:1px solid var(--gold);
+  background:transparent;
+
+  color:var(--gold);
+
+  cursor:pointer;
+  transition:.25s;
+}
+
+.btn:hover{
+  background:var(--gold);
+  color:#080a0e;
+}
+
+.btn-solid{
+  background:var(--gold);
+  color:#090b0e;
+}
+
+/* scroll */
+
+.scroll-indicator{
+  position:absolute;
+  bottom:35px;
+  left:8%;
+
+  font-size:11px;
+  color:#777f89;
+  letter-spacing:3px;
+}
+
+/* ================= GENERAL ================= */
+
+.section{
+  max-width:1250px;
+  margin:auto;
+  padding:110px 6%;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:30px;
+
+  margin-bottom:55px;
+}
+
+.section-number{
+  color:var(--gold);
+  font-size:12px;
+  letter-spacing:3px;
+}
+
+.section h2{
+  font-family:Georgia,serif;
+  font-size:clamp(37px,6vw,66px);
+  font-weight:400;
+  line-height:1;
+  margin-top:8px;
+}
+
+.section-intro{
+  max-width:470px;
+  color:var(--muted);
+}
+
+/* ================= HISTORY ================= */
+
+.history{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+}
+
+.history-story{
+  font-family:Georgia,serif;
+  font-size:20px;
+  color:#d7d7d3;
+}
+
+.history-story p{
+  margin-bottom:25px;
+}
+
+.quote{
+  border-left:2px solid var(--gold);
+  padding:10px 0 10px 24px;
+  margin-top:35px;
+
+  color:var(--gold);
+  font-size:24px;
+  font-style:italic;
+}
+
+.timeline{
+  border-left:1px solid var(--line);
+  padding-left:35px;
+}
+
+.time-item{
+  position:relative;
+  margin-bottom:45px;
+}
+
+.time-item::before{
+  content:"";
+  position:absolute;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--gold);
+
+  left:-40px;
+  top:8px;
+
+  box-shadow:0 0 15px rgba(211,174,98,.6);
+}
+
+.time-item small{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.time-item h3{
+  margin:6px 0;
+  font-size:20px;
+}
+
+.time-item p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* ================= CAMPUSES ================= */
+
+.campus-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  border:1px solid var(--line);
+}
+
+.campus{
+  min-height:320px;
+
+  padding:28px;
+
+  position:relative;
+
+  border-right:1px solid var(--line);
+  overflow:hidden;
+
+  cursor:pointer;
+  transition:.35s;
+}
+
+.campus:last-child{
+  border-right:none;
+}
+
+.campus::after{
+  content:"";
+  position:absolute;
+  bottom:-110px;
+  right:-110px;
+
+  width:230px;
+  height:230px;
+
+  border-radius:50%;
+  background:var(--campus);
+  opacity:.09;
+
+  transition:.4s;
+}
+
+.campus:hover{
+  background:#111720;
+  transform:translateY(-7px);
+}
+
+.campus:hover::after{
+  transform:scale(1.4);
+  opacity:.14;
+}
+
+.campus-rank{
+  color:var(--gold);
+  font-family:Georgia,serif;
+  font-size:42px;
+}
+
+.campus h3{
+  margin-top:80px;
+  font-family:Georgia,serif;
+  font-size:25px;
+}
+
+.campus p{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:8px;
+}
+
+/* ================= MATA ================= */
+
+.mata-panel{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:60px;
+
+  padding:45px;
+
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.018);
+}
+
+.mata-description h3{
+  font-family:Georgia,serif;
+  font-size:32px;
+  margin-bottom:20px;
+}
+
+.mata-description p{
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+.mata-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.tag{
+  padding:7px 11px;
+
+  border:1px solid var(--line);
+  color:#c4cad2;
+
+  font-size:12px;
+}
+
+.rankings{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.rank-row{
+  display:grid;
+  grid-template-columns:35px 130px 1fr 80px;
+  gap:12px;
+  align-items:center;
+}
+
+.rank-num{
+  font-family:Georgia,serif;
+  color:var(--gold);
+  font-size:22px;
+}
+
+.bar{
+  height:6px;
+  background:#1d242d;
+  position:relative;
+}
+
+.bar span{
+  display:block;
+  height:100%;
+  width:var(--width);
+  background:var(--color);
+  transition:1s;
+}
+
+.score{
+  text-align:right;
+  color:#aeb5be;
+  font-size:13px;
+}
+
+/* ================= CHARACTERS ================= */
+
+.character-toolbar{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:35px;
+}
+
+.search{
+  flex:1;
+  min-width:240px;
+
+  background:#0b1016;
+  border:1px solid var(--line);
+
+  color:white;
+  padding:13px 15px;
+  outline:none;
+}
+
+.search:focus{
+  border-color:var(--gold);
+}
+
+.filter-btn{
+  padding:12px 16px;
+
+  background:transparent;
+  border:1px solid var(--line);
+
+  color:#aeb4bc;
+  cursor:pointer;
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+.characters{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.character{
+  position:relative;
+  min-height:310px;
+
+  padding:30px;
+
+  border:1px solid var(--line);
+  background:
+  linear-gradient(145deg,#111720,#0b0f14);
+
+  overflow:hidden;
+
+  cursor:pointer;
+  transition:.3s;
+}
+
+.character:hover{
+  transform:translateY(-5px);
+  border-color:rgba(211,174,98,.45);
+}
+
+.initial{
+  position:absolute;
+  right:-5px;
+  top:-30px;
+
+  font-family:Georgia,serif;
+  font-size:170px;
+
+  color:rgba(255,255,255,.025);
+}
+
+.character-role{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:10px;
+}
+
+.character h3{
+  font-family:Georgia,serif;
+  font-size:29px;
+
+  margin-top:15px;
+}
+
+.character p{
+  margin-top:15px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.character-footer{
+  position:absolute;
+  bottom:25px;
+  left:30px;
+
+  color:#777f89;
+  font-size:12px;
+}
+
+/* ================= ROOM 217 ================= */
+
+.room{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:520px;
+
+  border:1px solid var(--line);
+}
+
+.room-visual{
+  padding:45px;
+
+  position:relative;
+  overflow:hidden;
+
+  background:
+  linear-gradient(135deg,#121a25,#080b10);
+}
+
+.room-no{
+  position:absolute;
+
+  font-family:Georgia,serif;
+  font-size:240px;
+  line-height:1;
+
+  opacity:.035;
+
+  bottom:-30px;
+  left:20px;
+}
+
+.beds{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+
+  height:100%;
+}
+
+.bed{
+  border:1px solid var(--line);
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+
+.bed small{
+  color:var(--gold);
+}
+
+.room-info{
+  padding:55px;
+  background:#0b0f14;
+}
+
+.room-info h3{
+  font-family:Georgia,serif;
+  font-size:38px;
+  margin-bottom:20px;
+}
+
+.room-info p{
+  color:var(--muted);
+  margin-bottom:30px;
+}
+
+/* ================= METROPOLI ================= */
+
+.metropoli{
+  display:grid;
+  grid-template-columns:1fr .9fr;
+  gap:40px;
+}
+
+.building{
+  border:1px solid var(--line);
+  background:#0b1016;
+
+  padding:25px;
+}
+
+.floor{
+  min-height:125px;
+  border:1px solid var(--line);
+  margin-bottom:10px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:22px;
+
+  position:relative;
+}
+
+.floor-number{
+  color:var(--gold);
+  font-family:Georgia,serif;
+  font-size:33px;
+}
+
+.floor-details{
+  text-align:right;
+}
+
+.floor-details h4{
+  font-size:17px;
+}
+
+.floor-details p{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.people{
+  color:#d96464;
+  font-size:12px;
+  margin-top:7px;
+}
+
+.secret{
+  position:absolute;
+  top:12px;
+  left:45%;
+  font-size:10px;
+  color:#6d737c;
+}
+
+.route-panel{
+  border:1px solid var(--line);
+  padding:35px;
+}
+
+.route-panel h3{
+  font-family:Georgia,serif;
+  font-size:30px;
+}
+
+.rule{
+  margin:24px 0;
+
+  padding:18px;
+
+  border-left:2px solid #b75252;
+  background:rgba(183,82,82,.06);
+
+  color:#ddd;
+}
+
+.route-step{
+  display:flex;
+  gap:20px;
+
+  padding:17px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.step-num{
+  color:var(--gold);
+  font-family:Georgia,serif;
+  font-size:28px;
+}
+
+.route-step p{
+  color:var(--muted);
+}
+
+/* ================= CHAPTERS ================= */
+
+.chapter-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.chapter{
+  border-top:1px solid var(--gold);
+  padding:28px 0;
+}
+
+.chapter small{
+  color:var(--gold);
+  letter-spacing:2px;
+}
+
+.chapter h3{
+  font-family:Georgia,serif;
+  font-size:27px;
+  margin:10px 0;
+}
+
+.chapter p{
+  color:var(--muted);
+}
+
+/* ================= ARCHIVE ================= */
+
+.archive{
+  margin-top:90px;
+
+  padding:90px 8%;
+
+  background:
+  linear-gradient(130deg,#101720,#080b10);
+
+  border-top:1px solid var(--line);
+}
+
+.archive-inner{
+  max-width:1000px;
+  margin:auto;
+  text-align:center;
+}
+
+.archive h2{
+  font-family:Georgia,serif;
+  font-size:55px;
+  font-weight:400;
+}
+
+.archive p{
+  max-width:600px;
+  margin:20px auto;
+  color:var(--muted);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  padding:45px 8%;
+
+  border-top:1px solid var(--line);
+
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+
+  color:#6f7781;
+  font-size:12px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(0,0,0,.82);
+  backdrop-filter:blur(12px);
+
+  padding:20px;
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-box{
+  max-width:610px;
+  width:100%;
+
+  background:#10161e;
+  border:1px solid rgba(211,174,98,.3);
+
+  padding:40px;
+
+  position:relative;
+
+  animation:modal .25s ease;
+}
+
+@keyframes modal{
+  from{
+    transform:translateY(20px);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+.close-modal{
+  position:absolute;
+  right:20px;
+  top:15px;
+
+  background:none;
+  border:none;
+
+  color:#999;
+  font-size:25px;
+
+  cursor:pointer;
+}
+
+.modal-role{
+  color:var(--gold);
+  letter-spacing:3px;
+  font-size:10px;
+  text-transform:uppercase;
+}
+
+.modal h2{
+  font-family:Georgia,serif;
+  font-size:42px;
+  margin:8px 0 17px;
+}
+
+.modal p{
+  color:#aeb5be;
+}
+
+.modal-details{
+  margin-top:25px;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.modal-detail{
+  border:1px solid var(--line);
+  padding:13px;
+}
+
+.modal-detail small{
+  display:block;
+  color:#69727d;
+}
+
+.modal-detail span{
+  color:#ddd;
+}
+
+/* ================= REVEAL ================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:.7s;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+
+  .campus-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .campus{
+    border-bottom:1px solid var(--line);
+  }
+
+  .history,
+  .mata-panel,
+  .room,
+  .metropoli{
+    grid-template-columns:1fr;
+  }
+
+  .characters,
+  .chapter-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:720px){
+
+  .nav{
+    padding:0 5%;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+
+    position:absolute;
+    top:72px;
+    left:0;
+
+    width:100%;
+    padding:25px;
+
+    flex-direction:column;
+
+    background:#080c11;
+    border-bottom:1px solid var(--line);
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+
+  .hero{
+    padding-left:6%;
+    padding-right:6%;
+  }
+
+  .hero h1{
+    font-size:65px;
+  }
+
+  .section{
+    padding:80px 6%;
+  }
+
+  .section-head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .campus-grid,
+  .characters,
+  .chapter-grid{
+    grid-template-columns:1fr;
+  }
+
+  .rank-row{
+    grid-template-columns:30px 100px 1fr;
+  }
+
+  .score{
+    display:none;
+  }
+
+  .mata-panel{
+    padding:25px;
+  }
+
+  .beds{
+    grid-template-columns:1fr;
+  }
+
+  .room-visual{
+    min-height:450px;
+  }
+
+  footer{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAV ================= -->
+
+<nav class="nav">
+
+  <a class="brand" href="#utama">
+    <span class="brand-mark">N</span>
+    NISKALA
+  </a>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#sejarah">Sejarah</a>
+    <a href="#kampus">Kampus</a>
+    <a href="#mata">Mata</a>
+    <a href="#watak">Watak</a>
+    <a href="#metropoli">Metropoli</a>
+    <a href="#bab">Bab</a>
+  </div>
+
+  <button class="menu-btn" id="menuBtn">☰</button>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<header class="hero" id="utama">
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      Arkib Institusi • Akses Terhad
+    </div>
+
+    <h1>
+      NIS<span>KALA</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Sebuah institusi pendidikan yang tidak sekadar menilai
+      apa yang diketahui oleh seseorang, tetapi bagaimana mereka
+      melihat sesuatu yang tidak dilihat oleh orang lain.
+    </p>
+
+    <div class="hero-actions">
+
+      <a href="#watak" class="btn btn-solid">
+        Teroka Watak
+      </a>
+
+      <a href="#sejarah" class="btn">
+        Buka Arkib
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="scroll-indicator">
+    ↓ TERUSKAN MEMBACA
+  </div>
+
+</header>
+
+
+<!-- ================= HISTORY ================= -->
+
+<section class="section reveal" id="sejarah">
+
+  <div class="section-head">
+
+    <div>
+      <span class="section-number">01 / ASAL USUL</span>
+      <h2>Sejarah Niskala</h2>
+    </div>
+
+    <p class="section-intro">
+      Niskala tidak bermula sebagai sebuah kolej elit.
+      Ia bermula daripada sebuah lembah dan satu kepercayaan
+      bahawa ilmu tidak sepatutnya dimiliki seorang diri.
+    </p>
+
+  </div>
+
+  <div class="history">
+
+    <div class="history-story">
+
+      <p>
+        Ratusan tahun dahulu, kawasan Niskala hanyalah sebuah
+        lembah yang didiami petani, pedagang, tukang dan
+        masyarakat kampung.
+      </p>
+
+      <p>
+        Mereka mempunyai satu budaya yang luar biasa.
+        Sesiapa yang keluar merantau mempunyai tanggungjawab
+        untuk membawa pulang sesuatu yang telah dipelajari.
+      </p>
+
+      <p>
+        Pengetahuan perdagangan, pembinaan, strategi,
+        bahasa, pembacaan dan pengalaman luar dikongsi
+        kepada masyarakat.
+      </p>
+
+      <div class="quote">
+        “Ilmu bukan milik seseorang.
+        Ilmu adalah milik bersama.”
+      </div>
+
+    </div>
+
+
+    <div class="timeline">
+
+      <div class="time-item">
+        <small>Permulaan</small>
+        <h3>Lembah Niskala</h3>
+        <p>
+          Sebuah komuniti kecil membentuk budaya
+          perkongsian ilmu antara generasi.
+        </p>
+      </div>
+
+      <div class="time-item">
+        <small>Beberapa Generasi</small>
+        <h3>Kelahiran Tokoh</h3>
+        <p>
+          Lembah kecil itu mula menghasilkan pendidik,
+          pencipta, pentadbir dan pemikir.
+        </p>
+      </div>
+
+      <div class="time-item">
+        <small>Era Pengasas</small>
+        <h3>Lima Tokoh Pulang</h3>
+        <p>
+          Lima tokoh dari lembah kembali dan membina
+          sebuah institusi pendidikan.
+        </p>
+      </div>
+
+      <div class="time-item">
+        <small>Hari Ini</small>
+        <h3>Niskala</h3>
+        <p>
+          Institusi tersebut berkembang menjadi
+          lima kampus dengan ribuan pelajar.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CAMPUSES ================= -->
+
+<section class="section reveal" id="kampus">
+
+  <div class="section-head">
+
+    <div>
+      <span class="section-number">02 / LIMA KAMPUS</span>
+      <h2>Lima nama.<br>Satu Niskala.</h2>
+    </div>
+
+    <p class="section-intro">
+      Setiap kampus mempunyai sejarah, tradisi,
+      komuniti dan persaingan tersendiri.
+      Tiada kampus dikhaskan untuk satu jenis kebolehan.
+    </p>
+
+  </div>
+
+
+  <div class="campus-grid">
+
+    <article
+      class="campus"
+      style="--campus:var(--tuah)"
+      onclick="showCampus('Tuah')">
+
+      <div class="campus-rank">01</div>
+
+      <h3>TUAH</h3>
+
+      <p>
+        Kedudukan semasa tertinggi
+        dalam sistem Mata Niskala.
+      </p>
+
+    </article>
+
+
+    <article
+      class="campus"
+      style="--campus:var(--mahawangsa)"
+      onclick="showCampus('Mahawangsa')">
+
+      <div class="campus-rank">02</div>
+
+      <h3>MAHAWANGSA</h3>
+
+      <p>
+        Kampus Faiz, Harith dan Danish.
+        Bilik 217 berada di sini.
+      </p>
+
+    </article>
+
+
+    <article
+      class="campus"
+      style="--campus:var(--indera)"
+      onclick="showCampus('Inderaputera')">
+
+      <div class="campus-rank">03</div>
+
+      <h3>INDERAPUTERA</h3>
+
+      <p>
+        Salah satu daripada lima komuniti
+        utama Niskala.
+      </p>
+
+    </article>
+
+
+    <article
+      class="campus"
+      style="--campus:var(--malim)"
+      onclick="showCampus('Malim')">
+
+      <div class="campus-rank">04</div>
+
+      <h3>MALIM</h3>
+
+      <p>
+        Kemudahan mula menunjukkan kesan
+        kedudukan rendah dalam sistem mata.
+      </p>
+
+    </article>
+
+
+    <article
+      class="campus"
+      style="--campus:var(--sulung)"
+      onclick="showCampus('Sulung')">
+
+      <div class="campus-rank">05</div>
+
+      <h3>SULUNG</h3>
+
+      <p>
+        Kampus dengan peruntukan paling
+        terhad pada kedudukan semasa.
+      </p>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- ================= MATA ================= -->
+
+<section class="section reveal" id="mata">
+
+  <div class="section-head">
+
+    <div>
+      <span class="section-number">03 / SISTEM</span>
+      <h2>Mata Niskala</h2>
+    </div>
+
+  </div>
+
+
+  <div class="mata-panel">
+
+    <div class="mata-description">
+
+      <h3>
+        Kedudukan bukan sekadar nombor.
+      </h3>
+
+      <p>
+        Setiap mahasiswa mempunyai Mata Individu.
+        Prestasi tertentu juga boleh menyumbang
+        kepada Mata Kampus.
+      </p>
+
+      <p>
+        Akademik, projek, pertandingan, aktiviti,
+        pencapaian dan tugasan tertentu boleh
+        memberikan mata.
+      </p>
+
+      <div class="mata-tags">
+
+        <span class="tag">Akademik</span>
+        <span class="tag">Projek</span>
+        <span class="tag">Pertandingan</span>
+        <span class="tag">Aktiviti</span>
+        <span class="tag">Cabaran</span>
+
+      </div>
+
+    </div>
+
+
+    <div class="rankings">
+
+      <div class="rank-row">
+        <span class="rank-num">1</span>
+        <span>Tuah</span>
+
+        <div class="bar">
+          <span
+            style="
+            --width:100%;
+            --color:var(--tuah)">
+          </span>
+        </div>
+
+        <span class="score">10,500</span>
+      </div>
+
+
+      <div class="rank-row">
+        <span class="rank-num">2</span>
+        <span>Mahawangsa</span>
+
+        <div class="bar">
+          <span
+            style="
+            --width:94%;
+            --color:var(--mahawangsa)">
+          </span>
+        </div>
+
+        <span class="score">9,850</span>
+      </div>
+
+
+      <div class="rank-row">
+        <span class="rank-num">3</span>
+        <span>Inderaputera</span>
+
+        <div class="bar">
+          <span
+            style="
+            --width:84%;
+            --color:var(--indera)">
+          </span>
+        </div>
+
+        <span class="score">8,900</span>
+      </div>
+
+
+      <div class="rank-row">
+        <span class="rank-num">4</span>
+        <span>Malim</span>
+
+        <div class="bar">
+          <span
+            style="
+            --width:78%;
+            --color:var(--malim)">
+          </span>
+        </div>
+
+        <span class="score">8,300</span>
+      </div>
+
+
+      <div class="rank-row">
+        <span class="rank-num">5</span>
+        <span>Sulung</span>
+
+        <div class="bar">
+          <span
+            style="
+            --width:68%;
+            --color:var(--sulung)">
+          </span>
+        </div>
+
+        <span class="score">7,550</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CHARACTERS ================= -->
+
+<section class="section reveal" id="watak">
+
+  <div class="section-head">
+
+    <div>
+      <span class="section-number">04 / ARKIB INDIVIDU</span>
+      <h2>Watak</h2>
+    </div>
+
+    <p class="section-intro">
+      Pilih mana-mana watak untuk membuka
+      rekod mereka.
+    </p>
+
+  </div>
+
+
+  <div class="character-toolbar">
+
+    <input
+      id="characterSearch"
+      class="search"
+      type="text"
+      placeholder="Cari nama watak..."
+    >
+
+    <button
+      class="filter-btn active"
+      data-filter="all">
+      Semua
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="student">
+      Pelajar
+    </button>
+
+    <button
+      class="filter-btn"
+      data-filter="staff">
+      Pensyarah
+    </button>
+
+  </div>
+
+
+  <div class="characters" id="characterGrid">
+
+    <!-- generated with JS -->
+
+  </div>
+
+</section>
+
+
+<!-- ================= ROOM 217 ================= -->
+
+<section class="section reveal">
+
+  <div class="section-head">
+
+    <div>
+      <span class="section-number">05 / MAHAWANGSA</span>
+      <h2>Bilik 217</h2>
+    </div>
+
+  </div>
+
+
+  <div class="room">
+
+    <div class="room-visual">
+
+      <div class="room-no">217</div>
+
+      <div class="beds">
+
+        <div class="bed">
+          <small>KATIL 01</small>
+          <strong>Harith</strong>
+        </div>
+
+        <div class="bed">
+          <small>KATIL 02</small>
+          <strong>Faiz</strong>
+        </div>
+
+        <div class="bed">
+          <small>KATIL 03</small>
+          <strong>Danish</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="room-info">
+
+      <span class="eyebrow">
+        Mahawangsa / Tingkat 2
+      </span>
+
+      <h3>
+        Tiga pelajar.<br>
+        Tiga cara melihat dunia.
+      </h3>
+
+      <p>
+        Mereka baru mengenali satu sama lain
+        ketika ditempatkan di bilik yang sama.
+        Pada pandangan pertama, tiada seorang pun
+        kelihatan seperti genius luar biasa yang
+        sering dikaitkan dengan Niskala.
+      </p>
+
+      <p>
+        Tetapi sedikit demi sedikit, perkara kecil
+        mula menunjukkan bahawa setiap seorang
+        mempunyai sesuatu yang tidak biasa.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= METROPOLI ================= -->
+
+<section class="section reveal" id="metropoli">
+
+  <div class="section-head">
+
+    <div>
+      <span class="section-number">06 / SIMULASI 01</span>
+      <h2>Metropoli</h2>
+    </div>
+
+    <p class="section-intro">
+      Lima orang awam terperangkap.
+      Kebanyakan pelajar cuba mencari jalan turun.
+      Kumpulan Faiz memilih arah bertentangan.
+    </p>
+
+  </div>
+
+
+  <div class="metropoli">
+
+    <div class="building">
+
+      <div class="floor">
+
+        <div class="floor-number">
+          03
+        </div>
+
+        <span class="secret">
+          △ tangga kecil
+        </span>
+
+        <div class="floor-details">
+          <h4>Kawasan Pentadbiran</h4>
+          <p>
+            Pejabat • Bilik mesyuarat • Bilik fail
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="floor">
+
+        <div class="floor-number">
+          02
+        </div>
+
+        <div class="floor-details">
+
+          <h4>Pusat Beli-Belah</h4>
+
+          <p>
+            Butik • Kiosk • Ruang legar
+          </p>
+
+          <div class="people">
+            ● ● ● ● ●
+            LIMA ORANG TERPERANGKAP
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="floor">
+
+        <div class="floor-number">
+          01
+        </div>
+
+        <div class="floor-details">
+          <h4>Food Court</h4>
+
+          <p>
+            Kawasan kebakaran
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="route-panel">
+
+      <span class="eyebrow">
+        Penyelesaian Kumpulan Faiz
+      </span>
+
+      <h3>
+        Jangan turun.
+        Naik.
+      </h3>
+
+      <div class="rule">
+        TANGGA TIDAK BOLEH DIGUNAKAN
+        UNTUK TURUN KE BAWAH.
+      </div>
+
+
+      <div class="route-step">
+
+        <span class="step-num">01</span>
+
+        <p>
+          Lima orang bergerak dari Tingkat 2
+          menuju tangga utama.
+        </p>
+
+      </div>
+
+
+      <div class="route-step">
+
+        <span class="step-num">02</span>
+
+        <p>
+          Mereka menggunakan tangga untuk
+          <strong>naik</strong> ke Tingkat 3.
+        </p>
+
+      </div>
+
+
+      <div class="route-step">
+
+        <span class="step-num">03</span>
+
+        <p>
+          Tangga kecil di kawasan pentadbiran
+          membawa mereka ke bahagian bumbung.
+        </p>
+
+      </div>
+
+
+      <div class="route-step">
+
+        <span class="step-num">04</span>
+
+        <p>
+          Maklumat visual yang diingati Harith
+          menunjukkan sambungan ke bangunan
+          bersebelahan.
+        </p>
+
+      </div>
+
+
+      <div class="route-step">
+
+        <span class="step-num">05</span>
+
+        <p>
+          Kelima-lima orang meninggalkan
+          Bangunan Metropoli tanpa turun
+          melalui tangga.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CHAPTERS ================= -->
+
+<section class="section reveal" id="bab">
+
+  <div class="section-head">
+
+    <div>
+      <span class="section-number">07 / REKOD CERITA</span>
+      <h2>Bab Semasa</h2>
+    </div>
+
+  </div>
+
+
+  <div class="chapter-grid">
+
+    <article class="chapter">
+
+      <small>BAB 01</small>
+
+      <h3>
+        Pemerhatian
+      </h3>
+
+      <p>
+        Kehidupan biasa Faiz berubah apabila
+        satu ujian mengejut membawa Dr. Zafran
+        kepada nama yang sudah lama berada
+        dalam pemerhatian Niskala.
+      </p>
+
+    </article>
+
+
+    <article class="chapter">
+
+      <small>BAB 02</small>
+
+      <h3>
+        Ketibaan
+      </h3>
+
+      <p>
+        Faiz menaiki bas tanpa mengetahui
+        lokasi sebenar Niskala sebelum
+        ditempatkan di Mahawangsa dan
+        bertemu Harith serta Danish.
+      </p>
+
+    </article>
+
+
+    <article class="chapter">
+
+      <small>BAB 03</small>
+
+      <h3>
+        Cara Melihat
+      </h3>
+
+      <p>
+        Simulasi Metropoli mula menunjukkan
+        cara Faiz melihat masalah, sementara
+        sistem Mata Niskala memperlihatkan
+        kesannya terhadap lima kampus.
+      </p>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- ================= ARCHIVE ================= -->
+
+<section class="archive">
+
+  <div class="archive-inner">
+
+    <span class="eyebrow">
+      Fail Belum Lengkap
+    </span>
+
+    <h2>
+      Masih banyak perkara
+      yang Niskala belum ceritakan.
+    </h2>
+
+    <p>
+      Mengapa Faiz sudah berada dalam pemerhatian
+      sebelum Dr. Zafran mencalonkannya?
+      Bagaimana Niskala memilih pelajarnya?
+      Dan apakah tujuan sebenar sistem yang
+      mengawal kehidupan lima kampus?
+    </p>
+
+    <a href="#utama" class="btn">
+      Kembali ke Atas
+    </a>
+
+  </div>
+
+</section>
+
+
+<footer>
+
+  <div>
+    NISKALA ARCHIVE
+  </div>
+
+  <div>
+    Novel World Database • Versi 01
+  </div>
+
+</footer>
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="modal">
+
+  <div class="modal-box">
+
+    <button
+      class="close-modal"
+      onclick="closeModal()">
+      ×
+    </button>
+
+    <div
+      class="modal-role"
+      id="modalRole">
+    </div>
+
+    <h2 id="modalName"></h2>
+
+    <p id="modalDescription"></p>
+
+    <div
+      class="modal-details"
+      id="modalDetails">
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+/* =========================
+   CHARACTER DATABASE
+   ========================= */
+
+const characters = [
+
+  {
+    name:"Faiz Arsyad bin Irsyadi",
+    short:"Faiz",
+    category:"student",
+    role:"Mahasiswa • Mahawangsa",
+    description:
+      "Watak utama yang kelihatan terlalu santai untuk seseorang yang dipilih Niskala. Faiz jarang cuba menonjolkan diri, tetapi sering melihat masalah daripada sudut yang tidak dipertimbangkan oleh orang lain.",
+    details:{
+      Kampus:"Mahawangsa",
+      Bilik:"217",
+      Mata:"4",
+      Sifat:"Santai • Pemerhati",
+      Status:"Pelajar Baharu",
+      Catatan:"Dalam pemerhatian Niskala sebelum pencalonan"
+    }
+  },
+
+  {
+    name:"Harith",
+    short:"Harith",
+    category:"student",
+    role:"Mahasiswa • Mahawangsa",
+    description:
+      "Rakan sebilik Faiz yang tenang dan tidak banyak bercakap. Dalam simulasi Metropoli, Harith mengingati satu butiran kecil daripada gambar yang pernah ditunjukkan Prof. Zaizul.",
+    details:{
+      Kampus:"Mahawangsa",
+      Bilik:"217",
+      Sifat:"Tenang • Teliti",
+      Status:"Pelajar Baharu",
+      Pemerhatian:"Ingatan visual luar biasa",
+      Catatan:"Keupayaan sebenar belum diketahui"
+    }
+  },
+
+  {
+    name:"Danish",
+    short:"Danish",
+    category:"student",
+    role:"Mahasiswa • Mahawangsa",
+    description:
+      "Rakan sebilik Faiz yang spontan dan mudah mesra. Beberapa tindakan kecil menunjukkan dia mempunyai pemahaman semula jadi terhadap struktur dan benda mekanikal.",
+    details:{
+      Kampus:"Mahawangsa",
+      Bilik:"217",
+      Sifat:"Spontan • Selamba",
+      Status:"Pelajar Baharu",
+      Pemerhatian:"Cenderung memahami mekanikal",
+      Catatan:"Sangat menghargai ayam kafeteria"
+    }
+  },
+
+  {
+    name:"Dr. Zafran",
+    short:"Zafran",
+    category:"staff",
+    role:"Pensyarah • Alumni Niskala",
+    description:
+      "Pensyarah universiti lama Faiz dan bekas mahasiswa Niskala. Selepas menyedari bahawa Faiz mengetahui sesuatu yang sepatutnya tersembunyi, dia cuba mencalonkan Faiz kepada Niskala.",
+    details:{
+      Status:"Alumni Niskala",
+      Hubungan:"Pensyarah Faiz",
+      Pencalonan:"Ditolak oleh sistem",
+      Mesej:"Calon telah berada dalam pemerhatian",
+      Rahsia:"Hubungan dengan Azlina",
+      Catatan:"Dia melihat terlalu banyak"
+    }
+  },
+
+  {
+    name:"Prof. Zaizul",
+    short:"Zaizul",
+    category:"staff",
+    role:"Profesor • Niskala",
+    description:
+      "Pensyarah yang menerangkan sejarah Niskala dan kemudian memberikan simulasi Bangunan Metropoli kepada pelajar daripada lima kampus.",
+    details:{
+      Institusi:"Niskala",
+      Peranan:"Pensyarah",
+      Aktiviti:"Simulasi Metropoli",
+      MarkahFaiz:"96 / 100",
+      Prinsip:"Cara berfikir lebih penting daripada hafalan",
+      Status:"Aktif"
+    }
+  },
+
+  {
+    name:"Arman",
+    short:"Arman",
+    category:"student",
+    role:"Mahasiswa • Tuah",
+    description:
+      "Ahli kumpulan Faiz dalam simulasi Metropoli. Cepat bertindak dan cenderung mencari penyelesaian yang boleh dilaksanakan dengan segera.",
+    details:{
+      Kampus:"Tuah",
+      Aktiviti:"Simulasi Metropoli",
+      Kumpulan:"Faiz • Harith • Danish • Nadhira",
+      Sifat:"Pantas • Praktikal",
+      Status:"Pelajar Niskala"
+    }
+  },
+
+  {
+    name:"Nadhira",
+    short:"Nadhira",
+    category:"student",
+    role:"Mahasiswa • Inderaputera",
+    description:
+      "Ahli kumpulan Faiz dalam simulasi Metropoli. Lebih tenang dan berhati-hati ketika menilai setiap pilihan yang dicadangkan oleh kumpulan.",
+    details:{
+      Kampus:"Inderaputera",
+      Aktiviti:"Simulasi Metropoli",
+      Kumpulan:"Faiz • Harith • Danish • Arman",
+      Sifat:"Tenang • Analitikal",
+      Status:"Pelajar Niskala"
+    }
+  },
+
+  {
+    name:"Hakim",
+    short:"Hakim",
+    category:"student",
+    role:"Rakan Universiti Lama",
+    description:
+      "Rakan Faiz sebelum Niskala. Hakim pernah bergurau bahawa dia akan meninggalkan universitinya jika diberi peluang memasuki Niskala.",
+    details:{
+      Institusi:"Universiti lama Faiz",
+      Hubungan:"Rakan Faiz",
+      Status:"Mahasiswa",
+      Pengetahuan:"Mengenali reputasi Niskala",
+      Catatan:"Sering mempersoalkan perangai Faiz"
+    }
+  },
+
+  {
+    name:"Iqbal",
+    short:"Iqbal",
+    category:"student",
+    role:"Rakan Universiti Lama",
+    description:
+      "Seorang lagi rakan Faiz sebelum Niskala. Iqbal antara individu yang memperkenalkan perbualan tentang reputasi Niskala sebelum Faiz menerima surat.",
+    details:{
+      Institusi:"Universiti lama Faiz",
+      Hubungan:"Rakan Faiz",
+      Status:"Mahasiswa",
+      Catatan:"Mengenali reputasi alumni Niskala"
+    }
+  }
+
+];
+
+
+/* =========================
+   CAMPUS DATABASE
+   ========================= */
+
+const campusInfo = {
+
+  Tuah:{
+    rank:"01",
+    description:
+      "Tuah berada di kedudukan pertama dalam ranking semasa Mata Niskala. Kedudukan yang tinggi memberikan kampus akses kepada peruntukan dan kemudahan yang lebih baik."
+  },
+
+  Mahawangsa:{
+    rank:"02",
+    description:
+      "Kampus Faiz, Harith dan Danish. Mahawangsa kini berada di tempat kedua dan mempunyai kemudahan yang selesa termasuk kafeteria dengan pilihan makanan yang luas."
+  },
+
+  Inderaputera:{
+    rank:"03",
+    description:
+      "Inderaputera berada di tengah-tengah kedudukan semasa Niskala. Nadhira merupakan antara pelajar kampus ini."
+  },
+
+  Malim:{
+    rank:"04",
+    description:
+      "Malim berada di kedudukan keempat. Faiz mula menyedari kesan ranking apabila melihat beberapa kemudahan Malim menunggu penyelenggaraan serta pilihan makanan yang lebih terhad."
+  },
+
+  Sulung:{
+    rank:"05",
+    description:
+      "Sulung berada di kedudukan kelima. Kemudahan asas masih disediakan, tetapi beberapa akses, penyelenggaraan dan pilihan tambahan lebih terhad berbanding kampus berkedudukan tinggi."
+  }
+
+};
+
+
+/* =========================
+   RENDER CHARACTERS
+   ========================= */
+
+const characterGrid =
+document.getElementById("characterGrid");
+
+const search =
+document.getElementById("characterSearch");
+
+let currentFilter = "all";
+
+
+function renderCharacters(){
+
+  const query =
+  search.value.toLowerCase();
+
+  characterGrid.innerHTML = "";
+
+  const filtered =
+  characters.filter(character => {
+
+    const matchesCategory =
+      currentFilter === "all" ||
+      character.category === currentFilter;
+
+    const matchesSearch =
+      character.name.toLowerCase().includes(query) ||
+      character.role.toLowerCase().includes(query);
+
+    return matchesCategory && matchesSearch;
+
+  });
+
+
+  filtered.forEach(character=>{
+
+    const card =
+    document.createElement("article");
+
+    card.className = "character";
+
+    card.innerHTML = `
+      <div class="initial">
+        ${character.short.charAt(0)}
+      </div>
+
+      <div class="character-role">
+        ${character.role}
+      </div>
+
+      <h3>
+        ${character.name}
+      </h3>
+
+      <p>
+        ${character.description}
+      </p>
+
+      <div class="character-footer">
+        BUKA FAIL →
+      </div>
+    `;
+
+    card.addEventListener(
+      "click",
+      ()=>openCharacter(character)
+    );
+
+    characterGrid.appendChild(card);
+
+  });
+
+}
+
+
+renderCharacters();
+
+
+/* =========================
+   SEARCH + FILTER
+   ========================= */
+
+search.addEventListener(
+  "input",
+  renderCharacters
+);
+
+document
+.querySelectorAll(".filter-btn")
+.forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    document
+    .querySelectorAll(".filter-btn")
+    .forEach(btn=>
+      btn.classList.remove("active")
+    );
+
+    button.classList.add("active");
+
+    currentFilter =
+      button.dataset.filter;
+
+    renderCharacters();
+
+  });
+
+});
+
+
+/* =========================
+   CHARACTER MODAL
+   ========================= */
+
+function openCharacter(character){
+
+  document
+  .getElementById("modalRole")
+  .textContent =
+  character.role;
+
+  document
+  .getElementById("modalName")
+  .textContent =
+  character.name;
+
+  document
+  .getElementById("modalDescription")
+  .textContent =
+  character.description;
+
+
+  const details =
+  document.getElementById("modalDetails");
+
+  details.innerHTML = "";
+
+
+  Object.entries(character.details)
+  .forEach(([key,value])=>{
+
+    details.innerHTML += `
+      <div class="modal-detail">
+        <small>${key}</small>
+        <span>${value}</span>
+      </div>
+    `;
+
+  });
+
+
+  document
+  .getElementById("modal")
+  .classList.add("active");
+
+}
+
+
+function closeModal(){
+
+  document
+  .getElementById("modal")
+  .classList.remove("active");
+
+}
+
+
+document
+.getElementById("modal")
+.addEventListener("click",event=>{
+
+  if(event.target.id === "modal"){
+    closeModal();
+  }
+
+});
+
+
+/* =========================
+   CAMPUS MODAL
+   ========================= */
+
+function showCampus(name){
+
+  const campus =
+  campusInfo[name];
+
+  document
+  .getElementById("modalRole")
+  .textContent =
+  "KAMPUS NISKALA • KEDUDUKAN " +
+  campus.rank;
+
+  document
+  .getElementById("modalName")
+  .textContent =
+  name.toUpperCase();
+
+  document
+  .getElementById("modalDescription")
+  .textContent =
+  campus.description;
+
+  document
+  .getElementById("modalDetails")
+  .innerHTML = `
+    <div class="modal-detail">
+      <small>Kedudukan Semasa</small>
+      <span>${campus.rank}</span>
+    </div>
+
+    <div class="modal-detail">
+      <small>Sistem</small>
+      <span>Mata Niskala</span>
+    </div>
+  `;
+
+  document
+  .getElementById("modal")
+  .classList.add("active");
+
+}
+
+
+/* =========================
+   MOBILE NAV
+   ========================= */
+
+const menuBtn =
+document.getElementById("menuBtn");
+
+const navLinks =
+document.getElementById("navLinks");
+
+
+menuBtn.addEventListener("click",()=>{
+
+  navLinks.classList.toggle("active");
+
+});
+
+
+navLinks
+.querySelectorAll("a")
+.forEach(link=>{
+
+  link.addEventListener("click",()=>{
+
+    navLinks.classList.remove("active");
+
+  });
+
+});
+
+
+/* =========================
+   SCROLL REVEAL
+   ========================= */
+
+const observer =
+new IntersectionObserver(
+entries=>{
+
+  entries.forEach(entry=>{
+
+    if(entry.isIntersecting){
+
+      entry.target
+      .classList.add("visible");
+
+    }
+
+  });
+
+},
+{
+  threshold:.1
+});
+
+
+document
+.querySelectorAll(".reveal")
+.forEach(element=>{
+
+  observer.observe(element);
+
+});
+
+
+/* =========================
+   ESC MODAL
+   ========================= */
+
+document.addEventListener(
+"keydown",
+event=>{
+
+  if(event.key === "Escape"){
+    closeModal();
+  }
+
+});
+</script>
+
+</body>
+</html>
