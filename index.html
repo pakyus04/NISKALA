@@ -364,20 +364,18 @@ input{
 
 .campus-grid{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
+  grid-template-columns:repeat(5,minmax(0,1fr));
   border:1px solid var(--line);
 }
 
 .campus{
-  min-height:320px;
-
-  padding:28px;
-
+  min-width:0;
   position:relative;
-
   border-right:1px solid var(--line);
   overflow:hidden;
-
+  display:flex;
+  flex-direction:column;
+  background:#0b1017;
   cursor:pointer;
   transition:.35s;
 }
@@ -386,48 +384,88 @@ input{
   border-right:none;
 }
 
-.campus::after{
+.campus-media{
+  position:absolute;
+  inset:0 0 auto;
+  aspect-ratio:2/3;
+  overflow:hidden;
+  background:#090d12;
+  border-bottom:1px solid var(--line);
+}
+
+.campus-banner{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  transition:transform .55s ease,filter .55s ease;
+}
+
+.campus-media::after{
   content:"";
   position:absolute;
-  bottom:-110px;
-  right:-110px;
-
-  width:230px;
-  height:230px;
-
-  border-radius:50%;
-  background:var(--campus);
-  opacity:.09;
-
-  transition:.4s;
+  inset:0;
+  background:linear-gradient(180deg,rgba(5,7,10,.02) 45%,rgba(5,7,10,.92) 100%);
+  pointer-events:none;
 }
 
-.campus:hover{
+.campus-logo{
+  position:absolute;
+  z-index:2;
+  left:50%;
+  bottom:16px;
+  width:min(45%,92px);
+  aspect-ratio:1;
+  object-fit:contain;
+  transform:translateX(-50%);
+  filter:drop-shadow(0 7px 14px rgba(0,0,0,.8));
+}
+
+.campus-content{
+  position:relative;
+  z-index:3;
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  padding:22px;
+  margin-top:150%;
+  background:linear-gradient(180deg,rgba(17,23,32,.98),#0b1017);
+}
+
+.campus:hover,
+.campus:focus-visible{
   background:#111720;
   transform:translateY(-7px);
+  outline:none;
+  box-shadow:0 18px 45px rgba(0,0,0,.35);
 }
 
-.campus:hover::after{
-  transform:scale(1.4);
-  opacity:.14;
+.campus:hover .campus-banner,
+.campus:focus-visible .campus-banner{
+  transform:scale(1.045);
+  filter:saturate(1.12) brightness(1.05);
 }
 
 .campus-rank{
   color:var(--gold);
   font-family:Georgia,serif;
-  font-size:42px;
+  font-size:34px;
+  line-height:1;
 }
 
 .campus h3{
-  margin-top:80px;
+  margin-top:18px;
   font-family:Georgia,serif;
-  font-size:25px;
+  font-size:clamp(18px,1.5vw,25px);
+  overflow-wrap:anywhere;
 }
 
 .campus p{
   color:var(--muted);
   font-size:13px;
   margin-top:8px;
+  flex:1;
 }
 
 /* ================= MATA ================= */
@@ -1337,16 +1375,26 @@ footer{
     <article
       class="campus"
       style="--campus:var(--tuah)"
-      onclick="showCampus('Tuah')">
+      role="button"
+      tabindex="0"
+      aria-label="Buka profil Kampus Tuah"
+      onclick="showCampus('Tuah')"
+      onkeydown="openCampusFromKeyboard(event,'Tuah')">
 
-      <div class="campus-rank">01</div>
+      <div class="campus-media">
+        <img class="campus-banner" src="assets/campuses/posters/tuah-banner.png" alt="Panji realistik Kampus Tuah" loading="lazy" decoding="async">
+        <img class="campus-logo" src="assets/campuses/tuah-logo.png" alt="Logo Kampus Tuah" loading="lazy" decoding="async">
+      </div>
 
-      <h3>TUAH</h3>
+      <div class="campus-content">
+        <div class="campus-rank">01</div>
+        <h3>TUAH</h3>
 
-      <p>
-        Kedudukan semasa tertinggi
-        dalam sistem Mata Niskala.
-      </p>
+        <p>
+          Kedudukan semasa tertinggi
+          dalam sistem Mata Niskala.
+        </p>
+      </div>
 
     </article>
 
@@ -1354,16 +1402,26 @@ footer{
     <article
       class="campus"
       style="--campus:var(--mahawangsa)"
-      onclick="showCampus('Mahawangsa')">
+      role="button"
+      tabindex="0"
+      aria-label="Buka profil Kampus Mahawangsa"
+      onclick="showCampus('Mahawangsa')"
+      onkeydown="openCampusFromKeyboard(event,'Mahawangsa')">
 
-      <div class="campus-rank">02</div>
+      <div class="campus-media">
+        <img class="campus-banner" src="assets/campuses/posters/mahawangsa-banner.png" alt="Panji realistik Kampus Mahawangsa" loading="lazy" decoding="async">
+        <img class="campus-logo" src="assets/campuses/mahawangsa-logo.png" alt="Logo Kampus Mahawangsa" loading="lazy" decoding="async">
+      </div>
 
-      <h3>MAHAWANGSA</h3>
+      <div class="campus-content">
+        <div class="campus-rank">02</div>
+        <h3>MAHAWANGSA</h3>
 
-      <p>
-        Kampus Faiz, Harith dan Danish.
-        Bilik 217 berada di sini.
-      </p>
+        <p>
+          Kampus Faiz, Harith dan Danish.
+          Bilik 217 berada di sini.
+        </p>
+      </div>
 
     </article>
 
@@ -1371,16 +1429,26 @@ footer{
     <article
       class="campus"
       style="--campus:var(--indera)"
-      onclick="showCampus('Inderaputera')">
+      role="button"
+      tabindex="0"
+      aria-label="Buka profil Kampus Inderaputera"
+      onclick="showCampus('Inderaputera')"
+      onkeydown="openCampusFromKeyboard(event,'Inderaputera')">
 
-      <div class="campus-rank">03</div>
+      <div class="campus-media">
+        <img class="campus-banner" src="assets/campuses/posters/inderaputera-banner.png" alt="Panji realistik Kampus Inderaputera" loading="lazy" decoding="async">
+        <img class="campus-logo" src="assets/campuses/inderaputera-logo.png" alt="Logo Kampus Inderaputera" loading="lazy" decoding="async">
+      </div>
 
-      <h3>INDERAPUTERA</h3>
+      <div class="campus-content">
+        <div class="campus-rank">03</div>
+        <h3>INDERAPUTERA</h3>
 
-      <p>
-        Salah satu daripada lima komuniti
-        utama Niskala.
-      </p>
+        <p>
+          Salah satu daripada lima komuniti
+          utama Niskala.
+        </p>
+      </div>
 
     </article>
 
@@ -1388,16 +1456,26 @@ footer{
     <article
       class="campus"
       style="--campus:var(--malim)"
-      onclick="showCampus('Malim')">
+      role="button"
+      tabindex="0"
+      aria-label="Buka profil Kampus Malim"
+      onclick="showCampus('Malim')"
+      onkeydown="openCampusFromKeyboard(event,'Malim')">
 
-      <div class="campus-rank">04</div>
+      <div class="campus-media">
+        <img class="campus-banner" src="assets/campuses/posters/malim-banner.png" alt="Panji realistik Kampus Malim" loading="lazy" decoding="async">
+        <img class="campus-logo" src="assets/campuses/malim-logo.png" alt="Logo Kampus Malim" loading="lazy" decoding="async">
+      </div>
 
-      <h3>MALIM</h3>
+      <div class="campus-content">
+        <div class="campus-rank">04</div>
+        <h3>MALIM</h3>
 
-      <p>
-        Kemudahan mula menunjukkan kesan
-        kedudukan rendah dalam sistem mata.
-      </p>
+        <p>
+          Kemudahan mula menunjukkan kesan
+          kedudukan rendah dalam sistem mata.
+        </p>
+      </div>
 
     </article>
 
@@ -1405,16 +1483,26 @@ footer{
     <article
       class="campus"
       style="--campus:var(--sulung)"
-      onclick="showCampus('Sulung')">
+      role="button"
+      tabindex="0"
+      aria-label="Buka profil Kampus Sulung"
+      onclick="showCampus('Sulung')"
+      onkeydown="openCampusFromKeyboard(event,'Sulung')">
 
-      <div class="campus-rank">05</div>
+      <div class="campus-media">
+        <img class="campus-banner" src="assets/campuses/posters/sulung-banner.png" alt="Panji realistik Kampus Sulung" loading="lazy" decoding="async">
+        <img class="campus-logo" src="assets/campuses/sulung-logo.png" alt="Logo Kampus Sulung" loading="lazy" decoding="async">
+      </div>
 
-      <h3>SULUNG</h3>
+      <div class="campus-content">
+        <div class="campus-rank">05</div>
+        <h3>SULUNG</h3>
 
-      <p>
-        Kampus dengan peruntukan paling
-        terhad pada kedudukan semasa.
-      </p>
+        <p>
+          Kampus dengan peruntukan paling
+          terhad pada kedudukan semasa.
+        </p>
+      </div>
 
     </article>
 
@@ -2253,30 +2341,45 @@ const campusInfo = {
 
   Tuah:{
     rank:"01",
+    image:"assets/campuses/posters/tuah-banner.png",
+    logo:"assets/campuses/tuah-logo.png",
+    identiti:"Merah darah • Lambang matahari",
     description:
       "Tuah berada di kedudukan pertama dalam ranking semasa Mata Niskala. Kedudukan yang tinggi memberikan kampus akses kepada peruntukan dan kemudahan yang lebih baik."
   },
 
   Mahawangsa:{
     rank:"02",
+    image:"assets/campuses/posters/mahawangsa-banner.png",
+    logo:"assets/campuses/mahawangsa-logo.png",
+    identiti:"Biru malam • Lambang sayap",
     description:
       "Kampus Faiz, Harith dan Danish. Mahawangsa kini berada di tempat kedua dan mempunyai kemudahan yang selesa termasuk kafeteria dengan pilihan makanan yang luas."
   },
 
   Inderaputera:{
     rank:"03",
+    image:"assets/campuses/posters/inderaputera-banner.png",
+    logo:"assets/campuses/inderaputera-logo.png",
+    identiti:"Ungu diraja • Lambang kompas",
     description:
       "Inderaputera berada di tengah-tengah kedudukan semasa Niskala. Nadhira merupakan antara pelajar kampus ini."
   },
 
   Malim:{
     rank:"04",
+    image:"assets/campuses/posters/malim-banner.png",
+    logo:"assets/campuses/malim-logo.png",
+    identiti:"Hijau hutan • Lambang pohon",
     description:
       "Malim berada di kedudukan keempat. Faiz mula menyedari kesan ranking apabila melihat beberapa kemudahan Malim menunggu penyelenggaraan serta pilihan makanan yang lebih terhad."
   },
 
   Sulung:{
     rank:"05",
+    image:"assets/campuses/posters/sulung-banner.png",
+    logo:"assets/campuses/sulung-logo.png",
+    identiti:"Hitam gangsa • Lambang nyala daun",
     description:
       "Sulung berada di kedudukan kelima. Kemudahan asas masih disediakan, tetapi beberapa akses, penyelenggaraan dan pilihan tambahan lebih terhad berbanding kampus berkedudukan tinggi."
   }
@@ -2515,7 +2618,13 @@ function showCampus(name){
 
   document
   .querySelector(".modal-box")
-  .classList.remove("has-image");
+  .classList.add("has-image");
+
+  const modalImage =
+  document.getElementById("modalImage");
+
+  modalImage.src = campus.image;
+  modalImage.alt = `Panji realistik Kampus ${name}`;
 
   const modalQuote =
   document.getElementById("modalQuote");
@@ -2551,6 +2660,16 @@ function showCampus(name){
       <small>Sistem</small>
       <span>Mata Niskala</span>
     </div>
+
+    <div class="modal-detail">
+      <small>Identiti Visual</small>
+      <span>${campus.identiti}</span>
+    </div>
+
+    <div class="modal-detail">
+      <small>Aset</small>
+      <span>Panji realistik & logo berlatar telus</span>
+    </div>
   `;
 
   document
@@ -2558,6 +2677,16 @@ function showCampus(name){
   .classList.add("active");
 
   document.body.classList.add("modal-open");
+
+}
+
+
+function openCampusFromKeyboard(event,name){
+
+  if(event.key === "Enter" || event.key === " "){
+    event.preventDefault();
+    showCampus(name);
+  }
 
 }
 
