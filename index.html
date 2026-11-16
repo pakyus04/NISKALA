@@ -3,2773 +3,955 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NISKALA — Arkib Rasmi</title>
+<title>NISKALA — Arkib Kayangan</title>
+<meta name="description" content="Arkib dunia novel Niskala: sejarah, lima kampus, sistem Mata Niskala, watak dan bab semasa.">
+<meta name="theme-color" content="#070822">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23e8c67e' stroke-width='1.6'%3E%3Crect x='5' y='5' width='14' height='14'/%3E%3Crect x='5' y='5' width='14' height='14' transform='rotate(45 12 12)'/%3E%3C/g%3E%3C/svg%3E">
 
 <style>
-/* =========================
-   NISKALA WEBSITE
-   ========================= */
-
+/* =====================================================
+   NISKALA — ARKIB KAYANGAN
+   Kayangan (awan, istana, bulan, emas)
+   + Futuristik (HUD, kaca, cahaya siber)
+   ===================================================== */
 :root{
-  --bg:#07090d;
-  --bg2:#0d1118;
-  --panel:#111720;
-  --panel2:#151d28;
-  --line:rgba(255,255,255,.09);
-  --text:#f3f0e8;
-  --muted:#9ca5b2;
-  --gold:#d3ae62;
-  --gold2:#8e6b32;
-  --white:#ffffff;
-
-  --tuah:#aa3946;
-  --mahawangsa:#334b7d;
-  --indera:#6d537e;
-  --malim:#84623c;
-  --sulung:#536a5c;
+  --void:#05061a;
+  --night:#0a0c2a;
+  --dusk:#1b1546;
+  --glass:rgba(150,160,255,.055);
+  --glass-2:rgba(150,160,255,.09);
+  --line:rgba(190,200,255,.14);
+  --gold:#e8c67e;
+  --gold-2:#b08d4f;
+  --aura:#8be9ff;
+  --lilac:#c4a8ff;
+  --text:#ecebf7;
+  --muted:#a4a7c6;
+  --serif:"Cinzel",Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono","SF Mono",Consolas,monospace;
+  --gutter:clamp(16px,5vw,64px);
+  --radius:14px;
 }
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--void)}
 body{
-  font-family:
-  Inter,
-  "Segoe UI",
-  Arial,
-  sans-serif;
-
-  background:
-    radial-gradient(circle at 20% 0%,rgba(211,174,98,.08),transparent 32%),
-    linear-gradient(180deg,#06080b 0%,#090d12 45%,#06080b 100%);
-
+  font-family:var(--sans);
   color:var(--text);
-  line-height:1.6;
+  background:var(--void);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--aura);outline-offset:3px}
+::selection{background:rgba(139,233,255,.25)}
 
-body.menu-open{
-  overflow:hidden;
+/* ---------- LANGIT (latar tetap) ---------- */
+.sky{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -12%,rgba(130,95,230,.38),transparent 62%),
+    radial-gradient(ellipse 50% 40% at 92% 28%,rgba(80,200,255,.10),transparent 60%),
+    radial-gradient(ellipse 60% 45% at 0% 75%,rgba(196,168,255,.08),transparent 60%),
+    linear-gradient(180deg,#0e0b30 0%,#080a26 40%,#05061a 100%);
 }
-
-body.modal-open{
-  overflow:hidden;
+.sky::before,.sky::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px,#fff,transparent),
+    radial-gradient(1px 1px at 140px 90px,rgba(255,255,255,.8),transparent),
+    radial-gradient(1.5px 1.5px at 260px 40px,#ffe9b8,transparent),
+    radial-gradient(1px 1px at 330px 210px,rgba(255,255,255,.7),transparent),
+    radial-gradient(1px 1px at 90px 250px,rgba(200,230,255,.8),transparent),
+    radial-gradient(1px 1px at 210px 330px,#fff,transparent),
+    radial-gradient(1.2px 1.2px at 380px 340px,rgba(255,255,255,.6),transparent);
+  background-size:400px 400px;
+  opacity:.55;
 }
-
-a{
-  text-decoration:none;
-  color:inherit;
+.sky::after{
+  background-size:620px 620px;
+  background-position:130px 70px;
+  opacity:.8;
+  animation:twinkle 6s ease-in-out infinite alternate;
 }
+@keyframes twinkle{from{opacity:.25}to{opacity:.85}}
 
-button,
-input{
-  font:inherit;
-}
-
-/* ================= NAV ================= */
-
+/* ---------- NAV ---------- */
 .nav{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:72px;
-  z-index:1000;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:0 6%;
-
-  background:rgba(6,8,11,.82);
-  backdrop-filter:blur(18px);
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  height:68px;padding:0 var(--gutter);
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(180deg,rgba(7,8,34,.85),rgba(7,8,34,.55));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);
 }
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-weight:600;letter-spacing:.32em;font-size:15px}
+.brand svg{width:26px;height:26px;color:var(--gold);filter:drop-shadow(0 0 6px rgba(232,198,126,.5))}
+.nav-links{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.nav-links a{position:relative;padding:6px 0;transition:color .2s}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--aura);transform:scaleX(0);transition:transform .25s;box-shadow:0 0 8px var(--aura)}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:42px;height:42px;cursor:pointer}
+.menu-btn span{display:block;width:18px;height:1.5px;background:var(--text);margin:4px auto;transition:.25s}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-
-  font-family:Georgia,serif;
-  letter-spacing:5px;
-  font-weight:bold;
-}
-
-.brand-mark{
-  width:34px;
-  height:34px;
-  border:1px solid var(--gold);
-  border-radius:50%;
-
-  display:grid;
-  place-items:center;
-
-  color:var(--gold);
-}
-
-.nav-links{
-  display:flex;
-  gap:27px;
-  font-size:13px;
-  color:#c0c5cd;
-}
-
-.nav-links a{
-  transition:.25s;
-}
-
-.nav-links a:hover{
-  color:var(--gold);
-}
-
-.menu-btn{
-  display:none;
-  background:none;
-  border:none;
-  color:white;
-  font-size:24px;
-}
-
-/* ================= HERO ================= */
-
+/* ---------- HERO ---------- */
 .hero{
-  min-height:100vh;
-
-  display:flex;
-  align-items:center;
-
-  position:relative;
-  overflow:hidden;
-
-  padding:120px 8% 80px;
+  position:relative;min-height:100svh;overflow:hidden;
+  display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:24px;
+  padding:110px var(--gutter) 230px;
 }
-
-.hero::before{
-  content:"";
-  position:absolute;
-  right:-120px;
-  top:160px;
-
-  width:550px;
-  height:550px;
-
-  border:1px solid rgba(211,174,98,.12);
-  border-radius:50%;
-}
-
-.hero::after{
-  content:"";
-  position:absolute;
-  right:30px;
-  top:310px;
-
-  width:250px;
-  height:250px;
-
-  border:1px solid rgba(211,174,98,.18);
-  transform:rotate(45deg);
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-  max-width:850px;
-}
-
+.hero-text{position:relative;z-index:3;max-width:640px}
 .eyebrow{
-  color:var(--gold);
-  letter-spacing:5px;
-  font-size:12px;
-  text-transform:uppercase;
-  margin-bottom:22px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--aura);display:inline-flex;align-items:center;gap:10px;
 }
-
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor;box-shadow:0 0 8px currentColor}
 .hero h1{
-  font-family:Georgia,serif;
-  font-weight:400;
-
-  font-size:clamp(70px,13vw,160px);
-  line-height:.82;
-
-  letter-spacing:-3px;
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(56px,10.5vw,148px);line-height:.95;letter-spacing:.06em;
+  margin:22px 0 8px;
+  background:linear-gradient(180deg,#fff6dc 0%,var(--gold) 55%,var(--gold-2) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 28px rgba(232,198,126,.25));
 }
-
-.hero h1 span{
-  color:var(--gold);
-}
-
-.hero-subtitle{
-  margin-top:35px;
-  max-width:610px;
-
-  font-size:18px;
-  color:#b7bec7;
-}
-
-.hero-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-top:40px;
-}
+.hero-sub-title{font-family:var(--serif);font-size:clamp(14px,1.6vw,18px);letter-spacing:.42em;color:var(--lilac);text-transform:uppercase}
+.hero p.lead{margin-top:26px;max-width:540px;font-size:clamp(16px,1.5vw,18px);color:#c6c8e2}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
 
 .btn{
-  padding:14px 22px;
+  position:relative;display:inline-flex;align-items:center;gap:10px;
+  padding:13px 22px;border-radius:999px;cursor:pointer;
+  font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  border:1px solid rgba(232,198,126,.55);color:var(--gold);background:rgba(232,198,126,.04);
+  transition:background .25s,color .25s,box-shadow .25s,transform .25s;
+}
+.btn:hover{background:rgba(232,198,126,.12);box-shadow:0 0 24px rgba(232,198,126,.25);transform:translateY(-1px)}
+.btn-solid{background:linear-gradient(180deg,#f3d896,var(--gold));color:#140f2e;border-color:transparent}
+.btn-solid:hover{background:linear-gradient(180deg,#fff0c4,#f0d18c);color:#140f2e}
 
-  border:1px solid var(--gold);
-  background:transparent;
+/* bulan + orbit HUD */
+.orbit{position:relative;z-index:2;justify-self:center;width:min(440px,80vw);aspect-ratio:1}
+.orbit svg{width:100%;height:100%;overflow:visible}
+.spin{transform-box:view-box;transform-origin:center;animation:spin 80s linear infinite}
+.spin.rev{animation-duration:120s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.moon-glow{filter:drop-shadow(0 0 30px rgba(255,226,160,.45))}
+.orbit-label{font-family:var(--mono);font-size:9.5px;letter-spacing:4px;fill:rgba(139,233,255,.75)}
 
-  color:var(--gold);
+/* istana terapung + awan */
+.palace{
+  position:absolute;z-index:1;right:6%;bottom:118px;width:min(520px,62vw);
+  animation:float 9s ease-in-out infinite;
+  filter:drop-shadow(0 0 18px rgba(196,168,255,.18));
+}
+@keyframes float{50%{transform:translateY(-12px)}}
+.palace .lamp{animation:lamp 3.5s ease-in-out infinite alternate}
+@keyframes lamp{from{opacity:.55}to{opacity:1}}
+.clouds{position:absolute;left:0;right:0;bottom:0;height:220px;z-index:2;pointer-events:none;overflow:hidden}
+.cloud-track{position:absolute;bottom:0;left:0;width:200%;height:100%;display:flex;animation:drift 110s linear infinite}
+.cloud-track.front{height:150px;animation-duration:70s;z-index:2}
+.cloud-track svg{width:50%;height:100%}
+@keyframes drift{to{transform:translateX(-50%)}}
+.scroll-cue{
+  position:absolute;z-index:4;left:var(--gutter);bottom:28px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--muted);
+}
+.scroll-cue::after{content:"";display:inline-block;width:1px;height:26px;margin-left:12px;vertical-align:middle;background:linear-gradient(var(--aura),transparent);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{50%{transform:translateY(6px);opacity:.4}}
 
-  cursor:pointer;
-  transition:.25s;
+/* ---------- UMUM: SEKSYEN ---------- */
+.section{max-width:1240px;margin:0 auto;padding:clamp(72px,10vw,120px) var(--gutter)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:clamp(36px,5vw,56px)}
+.sec-idx{font-family:var(--mono);font-size:12px;letter-spacing:.24em;color:var(--aura);display:flex;align-items:center;gap:10px}
+.sec-idx i{width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--gold);box-shadow:0 0 8px rgba(232,198,126,.6)}
+.sec-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5.6vw,62px);line-height:1.05;margin-top:12px;letter-spacing:.02em}
+.sec-intro{max-width:440px;color:var(--muted)}
+.orn{display:flex;align-items:center;gap:12px;color:var(--gold);margin:14px 0 0}
+.orn::before,.orn::after{content:"";height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--gold))}
+.orn::after{transform:scaleX(-1)}
+.orn span{width:8px;height:8px;transform:rotate(45deg);background:var(--gold);box-shadow:0 0 10px var(--gold)}
+
+/* panel kaca + sudut HUD */
+.glass{
+  background:linear-gradient(180deg,var(--glass-2),var(--glass));
+  border:1px solid var(--line);border-radius:var(--radius);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+.hud{position:relative}
+.hud::before{
+  content:"";position:absolute;inset:-1px;pointer-events:none;border-radius:inherit;
+  --c:rgba(139,233,255,.7);
+  background:
+    linear-gradient(var(--c),var(--c)) top left/16px 1px,
+    linear-gradient(var(--c),var(--c)) top left/1px 16px,
+    linear-gradient(var(--c),var(--c)) top right/16px 1px,
+    linear-gradient(var(--c),var(--c)) top right/1px 16px,
+    linear-gradient(var(--c),var(--c)) bottom left/16px 1px,
+    linear-gradient(var(--c),var(--c)) bottom left/1px 16px,
+    linear-gradient(var(--c),var(--c)) bottom right/16px 1px,
+    linear-gradient(var(--c),var(--c)) bottom right/1px 16px;
+  background-repeat:no-repeat;
 }
 
-.btn:hover{
-  background:var(--gold);
-  color:#080a0e;
-}
+/* muncul semasa skrol */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease}
+.reveal.in{opacity:1;transform:none}
 
-.btn-solid{
-  background:var(--gold);
-  color:#090b0e;
-}
-
-/* scroll */
-
-.scroll-indicator{
-  position:absolute;
-  bottom:35px;
-  left:8%;
-
-  font-size:11px;
-  color:#777f89;
-  letter-spacing:3px;
-}
-
-/* ================= GENERAL ================= */
-
-.section{
-  max-width:1250px;
-  margin:auto;
-  padding:110px 6%;
-}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:30px;
-
-  margin-bottom:55px;
-}
-
-.section-number{
-  color:var(--gold);
-  font-size:12px;
-  letter-spacing:3px;
-}
-
-.section h2{
-  font-family:Georgia,serif;
-  font-size:clamp(37px,6vw,66px);
-  font-weight:400;
-  line-height:1;
-  margin-top:8px;
-}
-
-.section-intro{
-  max-width:470px;
-  color:var(--muted);
-}
-
-/* ================= HISTORY ================= */
-
-.history{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:50px;
-}
-
-.history-story{
-  font-family:Georgia,serif;
-  font-size:20px;
-  color:#d7d7d3;
-}
-
-.history-story p{
-  margin-bottom:25px;
-}
-
+/* ---------- SEJARAH ---------- */
+.history{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,64px)}
+.story{padding:clamp(24px,4vw,40px)}
+.story p{font-size:clamp(16px,1.5vw,18px);color:#d6d6ea;margin-bottom:18px}
 .quote{
+  margin-top:28px;padding:22px 24px;border-radius:12px;
+  font-family:var(--serif);font-size:clamp(18px,2vw,22px);line-height:1.5;color:var(--gold);
+  background:radial-gradient(ellipse at top left,rgba(232,198,126,.12),transparent 70%);
   border-left:2px solid var(--gold);
-  padding:10px 0 10px 24px;
-  margin-top:35px;
-
-  color:var(--gold);
-  font-size:24px;
-  font-style:italic;
 }
-
-.timeline{
-  border-left:1px solid var(--line);
-  padding-left:35px;
+.timeline{position:relative;padding-left:34px}
+.timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--gold),var(--aura),transparent);box-shadow:0 0 10px rgba(139,233,255,.5)}
+.t-item{position:relative;margin-bottom:34px}
+.t-item::before{
+  content:"";position:absolute;left:-32px;top:7px;width:12px;height:12px;
+  transform:rotate(45deg);background:var(--void);border:1px solid var(--gold);
+  box-shadow:0 0 12px rgba(232,198,126,.7),inset 0 0 6px rgba(232,198,126,.6);
 }
+.t-item small{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--aura)}
+.t-item h3{font-family:var(--serif);font-weight:400;font-size:20px;margin:4px 0}
+.t-item p{color:var(--muted);font-size:15px}
 
-.time-item{
-  position:relative;
-  margin-bottom:45px;
-}
-
-.time-item::before{
-  content:"";
-  position:absolute;
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:var(--gold);
-
-  left:-40px;
-  top:8px;
-
-  box-shadow:0 0 15px rgba(211,174,98,.6);
-}
-
-.time-item small{
-  color:var(--gold);
-  text-transform:uppercase;
-  letter-spacing:2px;
-}
-
-.time-item h3{
-  margin:6px 0;
-  font-size:20px;
-}
-
-.time-item p{
-  color:var(--muted);
-  font-size:14px;
-}
-
-/* ================= CAMPUSES ================= */
-
-.campus-grid{
-  display:grid;
-  grid-template-columns:repeat(5,minmax(0,1fr));
-  border:1px solid var(--line);
-}
-
+/* ---------- KAMPUS ---------- */
+.campus-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
 .campus{
-  min-width:0;
-  position:relative;
-  border-right:1px solid var(--line);
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  background:#0b1017;
-  cursor:pointer;
-  transition:.35s;
+  --c:var(--gold);
+  position:relative;overflow:hidden;cursor:pointer;text-align:left;
+  display:flex;flex-direction:column;justify-content:flex-start;width:100%;padding:0;
+  border-radius:var(--radius);border:1px solid var(--line);background:var(--night);
+  transition:transform .35s,border-color .35s,box-shadow .35s;
 }
-
-.campus:last-child{
-  border-right:none;
-}
-
-.campus-media{
-  position:absolute;
-  inset:0 0 auto;
-  aspect-ratio:2/3;
-  overflow:hidden;
-  background:#090d12;
-  border-bottom:1px solid var(--line);
-}
-
-.campus-banner{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center top;
-  transition:transform .55s ease,filter .55s ease;
-}
-
+.campus:hover,.campus:focus-visible{transform:translateY(-6px);border-color:var(--c);box-shadow:0 18px 40px -18px var(--c),0 0 0 1px var(--c)}
+.campus-media{aspect-ratio:2/3;overflow:hidden;position:relative;width:100%;flex:none}
+.campus-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.campus:hover .campus-media img{transform:scale(1.05)}
 .campus-media::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,rgba(5,7,10,.02) 45%,rgba(5,7,10,.92) 100%);
-  pointer-events:none;
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 55%,rgba(5,6,26,.95)),
+             linear-gradient(115deg,transparent 30%,rgba(255,255,255,.18) 45%,transparent 60%);
+  background-size:100% 100%,250% 100%;background-position:0 0,120% 0;
+  transition:background-position .9s;
 }
+.campus:hover .campus-media::after{background-position:0 0,-60% 0}
+.campus-body{position:relative;padding:14px 16px 18px;margin-top:-56px}
+.campus-rank{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--c)}
+.campus h3{font-family:var(--serif);font-weight:600;font-size:clamp(15px,1.4vw,18px);letter-spacing:.12em;margin:4px 0 6px}
+.campus p{font-size:13px;color:var(--muted);line-height:1.5}
 
-.campus-logo{
-  position:absolute;
-  z-index:2;
-  left:50%;
-  bottom:16px;
-  width:min(45%,92px);
-  aspect-ratio:1;
-  object-fit:contain;
-  transform:translateX(-50%);
-  filter:drop-shadow(0 7px 14px rgba(0,0,0,.8));
+/* ---------- MATA NISKALA ---------- */
+.mata{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(24px,4vw,48px);padding:clamp(24px,4vw,44px)}
+.mata h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.6vw,30px);line-height:1.25;margin-bottom:16px}
+.mata p{color:var(--muted);margin-bottom:14px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:999px;border:1px solid rgba(139,233,255,.35);color:var(--aura);background:rgba(139,233,255,.05)}
+.ranks{display:flex;flex-direction:column;gap:14px;justify-content:center}
+.rank-row{display:grid;grid-template-columns:28px 36px 120px 1fr 72px;align-items:center;gap:12px}
+.rank-no{font-family:var(--mono);color:var(--muted);font-size:13px}
+.rank-row img{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 0 6px var(--c))}
+.rank-name{font-family:var(--serif);font-size:15px;letter-spacing:.06em}
+.bar{position:relative;height:10px;border-radius:999px;background:rgba(255,255,255,.05);overflow:hidden}
+.bar i{
+  position:absolute;inset:0 auto 0 0;width:0;border-radius:inherit;
+  background:linear-gradient(90deg,transparent,var(--c));
+  box-shadow:0 0 14px var(--c);
+  transition:width 1.6s cubic-bezier(.2,.8,.2,1);
 }
+.bar::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 9px,rgba(5,6,26,.85) 9px 11px)}
+.score{font-family:var(--mono);font-size:14px;text-align:right;color:var(--text)}
 
-.campus-content{
-  position:relative;
-  z-index:3;
-  display:flex;
-  flex:1;
-  flex-direction:column;
-  padding:22px;
-  margin-top:150%;
-  background:linear-gradient(180deg,rgba(17,23,32,.98),#0b1017);
-}
-
-.campus:hover,
-.campus:focus-visible{
-  background:#111720;
-  transform:translateY(-7px);
-  outline:none;
-  box-shadow:0 18px 45px rgba(0,0,0,.35);
-}
-
-.campus:hover .campus-banner,
-.campus:focus-visible .campus-banner{
-  transform:scale(1.045);
-  filter:saturate(1.12) brightness(1.05);
-}
-
-.campus-rank{
-  color:var(--gold);
-  font-family:Georgia,serif;
-  font-size:34px;
-  line-height:1;
-}
-
-.campus h3{
-  margin-top:18px;
-  font-family:Georgia,serif;
-  font-size:clamp(18px,1.5vw,25px);
-  overflow-wrap:anywhere;
-}
-
-.campus p{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:8px;
-  flex:1;
-}
-
-/* ================= MATA ================= */
-
-.mata-panel{
-  display:grid;
-  grid-template-columns:1fr 1.2fr;
-  gap:60px;
-
-  padding:45px;
-
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.018);
-}
-
-.mata-description h3{
-  font-family:Georgia,serif;
-  font-size:32px;
-  margin-bottom:20px;
-}
-
-.mata-description p{
-  color:var(--muted);
-  margin-bottom:20px;
-}
-
-.mata-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-
-.tag{
-  padding:7px 11px;
-
-  border:1px solid var(--line);
-  color:#c4cad2;
-
-  font-size:12px;
-}
-
-.rankings{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-
-.rank-row{
-  display:grid;
-  grid-template-columns:35px 130px 1fr 80px;
-  gap:12px;
-  align-items:center;
-}
-
-.rank-num{
-  font-family:Georgia,serif;
-  color:var(--gold);
-  font-size:22px;
-}
-
-.bar{
-  height:6px;
-  background:#1d242d;
-  position:relative;
-}
-
-.bar span{
-  display:block;
-  height:100%;
-  width:var(--width);
-  background:var(--color);
-  transition:1s;
-}
-
-.score{
-  text-align:right;
-  color:#aeb5be;
-  font-size:13px;
-}
-
-/* ================= CHARACTERS ================= */
-
-.character-toolbar{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-bottom:35px;
-}
-
+/* ---------- WATAK ---------- */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
 .search{
-  flex:1;
-  min-width:240px;
-
-  background:#0b1016;
-  border:1px solid var(--line);
-
-  color:white;
-  padding:13px 15px;
-  outline:none;
+  flex:1 1 260px;min-width:0;padding:12px 18px 12px 42px;border-radius:999px;
+  border:1px solid var(--line);background:var(--glass) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238be9ff' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 16px center;
+  outline:none;transition:border-color .2s,box-shadow .2s;
 }
-
-.search:focus{
-  border-color:var(--gold);
+.search::placeholder{color:var(--muted)}
+.search:focus{border-color:var(--aura);box-shadow:0 0 0 3px rgba(139,233,255,.12)}
+.chip{
+  padding:11px 18px;border-radius:999px;cursor:pointer;
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--line);background:var(--glass);color:var(--muted);transition:.2s;
 }
-
-.filter-btn{
-  padding:12px 16px;
-
-  background:transparent;
-  border:1px solid var(--line);
-
-  color:#aeb4bc;
-  cursor:pointer;
+.chip:hover{color:var(--text)}
+.chip[aria-pressed="true"]{color:#140f2e;background:var(--gold);border-color:var(--gold)}
+.chars{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.char{
+  cursor:pointer;text-align:left;padding:14px 14px 18px;display:flex;flex-direction:column;width:100%;
+  border-radius:calc(var(--radius) + 4px);border:1px solid var(--line);background:var(--glass);
+  transition:transform .35s,border-color .35s,background .35s;
 }
-
-.filter-btn.active,
-.filter-btn:hover{
-  border-color:var(--gold);
-  color:var(--gold);
+.char:hover,.char:focus-visible{transform:translateY(-6px);border-color:rgba(232,198,126,.5);background:var(--glass-2)}
+.arch{
+  position:relative;aspect-ratio:4/5;overflow:hidden;
+  border-radius:999px 999px 10px 10px;
+  border:1px solid rgba(232,198,126,.45);
+  box-shadow:inset 0 0 0 4px rgba(5,6,26,.6),0 0 0 1px rgba(232,198,126,.12);
 }
-
-.characters{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
+.arch img{width:100%;height:100%;object-fit:cover;object-position:28% 18%;transition:transform .6s}
+.char:hover .arch img{transform:scale(1.06)}
+.arch::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(180deg,rgba(139,233,255,.07) 0 1px,transparent 1px 4px),
+             linear-gradient(180deg,transparent 60%,rgba(5,6,26,.7));
+  opacity:0;transition:opacity .35s;
 }
-
-.character{
-  position:relative;
-  border:1px solid var(--line);
-  background:#0b0f14;
-  overflow:hidden;
-  cursor:pointer;
-  transition:.3s;
+.char:hover .arch::after{opacity:1}
+.sealed{
+  width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  background:radial-gradient(ellipse at 50% 30%,rgba(196,168,255,.16),transparent 65%),
+             repeating-linear-gradient(135deg,rgba(139,233,255,.05) 0 2px,transparent 2px 12px),#0b0b2c;
+  color:rgba(232,198,126,.75);
 }
+.sealed svg{width:42%;max-width:130px;opacity:.85}
+.sealed span{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--aura);text-align:center;padding:0 10px}
+.char-role{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--aura);margin:16px 0 6px}
+.char h3{font-family:var(--serif);font-weight:400;font-size:17px;line-height:1.3}
+.char p{font-size:13.5px;color:var(--muted);margin-top:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.char-cta{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--gold);margin-top:14px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px;font-family:var(--mono);font-size:13px;letter-spacing:.1em}
 
-.character:hover{
-  transform:translateY(-5px);
-  border-color:rgba(211,174,98,.45);
-}
-
-.character-image{
-  position:relative;
-  aspect-ratio:4 / 5;
-  overflow:hidden;
-  background:#080b10;
-}
-
-.character-image::after{
-  content:"";
-  position:absolute;
-  inset:45% 0 0;
-  background:linear-gradient(transparent,rgba(7,9,13,.9));
-  pointer-events:none;
-}
-
-.character-image img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .55s ease;
-}
-
-.character:hover .character-image img{
-  transform:scale(1.025);
-}
-
-.character-content{
-  padding:22px 24px 25px;
-}
-
-.character-role{
-  color:var(--gold);
-  text-transform:uppercase;
-  letter-spacing:2px;
-  font-size:10px;
-}
-
-.character h3{
-  font-family:Georgia,serif;
-  font-size:23px;
-  line-height:1.15;
-  margin-top:10px;
-}
-
-.character p{
-  margin-top:13px;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.character-footer{
-  margin-top:18px;
-  color:var(--gold);
-  font-size:12px;
-  letter-spacing:1px;
-}
-
-/* ================= ROOM 217 ================= */
-
-.room{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  min-height:520px;
-
-  border:1px solid var(--line);
-}
-
-.room-visual{
-  padding:45px;
-
-  position:relative;
-  overflow:hidden;
-
-  background:
-  linear-gradient(135deg,#121a25,#080b10);
-}
-
+/* ---------- BILIK 217 ---------- */
+.room{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
+.room-visual{padding:clamp(24px,4vw,40px);text-align:center}
 .room-no{
-  position:absolute;
-
-  font-family:Georgia,serif;
-  font-size:240px;
-  line-height:1;
-
-  opacity:.035;
-
-  bottom:-30px;
-  left:20px;
+  font-family:var(--serif);font-size:clamp(84px,13vw,150px);line-height:1;letter-spacing:.08em;
+  color:transparent;-webkit-text-stroke:1px var(--gold);
+  text-shadow:0 0 40px rgba(232,198,126,.25);
 }
+.beds{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.bed{padding:14px 8px;border-radius:12px;border:1px solid var(--line);background:rgba(5,6,26,.5)}
+.bed small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--aura)}
+.bed strong{font-family:var(--serif);font-weight:400;font-size:17px}
+.room-info h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3vw,34px);line-height:1.25;margin:14px 0 18px}
+.room-info p{color:var(--muted);margin-bottom:14px}
 
-.beds{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
+/* ---------- METROPOLI ---------- */
+.metro{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,36px)}
+.building{padding:18px;display:flex;flex-direction:column;gap:10px}
+.floor{position:relative;display:grid;grid-template-columns:62px 1fr;gap:16px;align-items:center;padding:18px;border-radius:12px;border:1px solid var(--line);background:rgba(5,6,26,.45)}
+.floor-no{font-family:var(--mono);font-size:26px;color:var(--gold)}
+.floor h4{font-family:var(--serif);font-weight:400;font-size:17px}
+.floor p{font-size:13.5px;color:var(--muted)}
+.floor.top{border-color:rgba(139,233,255,.45);box-shadow:0 0 22px -6px rgba(139,233,255,.5)}
+.floor.fire{border-color:rgba(255,120,90,.45);background:linear-gradient(90deg,rgba(255,110,70,.12),rgba(5,6,26,.45))}
+.secret{position:absolute;right:14px;top:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--aura)}
+.people{margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--gold)}
+.people b{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);margin-right:5px;animation:lamp 1.4s ease-in-out infinite alternate}
+.route{padding:clamp(22px,3vw,34px)}
+.route h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3.4vw,38px);line-height:1.15;margin:12px 0 16px}
+.route h3 em{font-style:normal;color:var(--aura);text-shadow:0 0 18px rgba(139,233,255,.5)}
+.rule{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;padding:10px 14px;border:1px dashed rgba(255,120,90,.5);color:#ffb3a0;border-radius:8px;margin-bottom:20px}
+.steps{list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:38px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:14.5px;color:#cfd0e6}
+.steps li::before{content:"0" counter(s);font-family:var(--mono);color:var(--gold)}
+.steps strong{color:var(--aura);font-weight:600}
 
-  height:100%;
+/* ---------- BAB ---------- */
+.chapters{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.chapter{position:relative;padding:28px 24px;overflow:hidden}
+.chapter .big{
+  position:absolute;right:12px;top:-6px;font-family:var(--serif);font-size:96px;line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(232,198,126,.22);pointer-events:none;
 }
+.chapter small{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--aura)}
+.chapter h3{font-family:var(--serif);font-weight:400;font-size:22px;margin:8px 0 10px}
+.chapter p{color:var(--muted);font-size:14.5px}
 
-.bed{
-  border:1px solid var(--line);
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
+/* ---------- PENUTUP ---------- */
+.archive{text-align:center;padding:clamp(80px,12vw,140px) var(--gutter);position:relative}
+.archive::before{
+  content:"";position:absolute;left:50%;top:40px;width:120px;height:120px;transform:translateX(-50%);
+  border-radius:50%;box-shadow:inset -22px 8px 0 0 var(--gold);opacity:.85;
+  filter:drop-shadow(0 0 22px rgba(232,198,126,.5));
 }
-
-.bed small{
-  color:var(--gold);
-}
-
-.room-info{
-  padding:55px;
-  background:#0b0f14;
-}
-
-.room-info h3{
-  font-family:Georgia,serif;
-  font-size:38px;
-  margin-bottom:20px;
-}
-
-.room-info p{
-  color:var(--muted);
-  margin-bottom:30px;
-}
-
-/* ================= METROPOLI ================= */
-
-.metropoli{
-  display:grid;
-  grid-template-columns:1fr .9fr;
-  gap:40px;
-}
-
-.building{
-  border:1px solid var(--line);
-  background:#0b1016;
-
-  padding:25px;
-}
-
-.floor{
-  min-height:125px;
-  border:1px solid var(--line);
-  margin-bottom:10px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:22px;
-
-  position:relative;
-}
-
-.floor-number{
-  color:var(--gold);
-  font-family:Georgia,serif;
-  font-size:33px;
-}
-
-.floor-details{
-  text-align:right;
-}
-
-.floor-details h4{
-  font-size:17px;
-}
-
-.floor-details p{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.people{
-  color:#d96464;
-  font-size:12px;
-  margin-top:7px;
-}
-
-.secret{
-  position:absolute;
-  top:12px;
-  left:45%;
-  font-size:10px;
-  color:#6d737c;
-}
-
-.route-panel{
-  border:1px solid var(--line);
-  padding:35px;
-}
-
-.route-panel h3{
-  font-family:Georgia,serif;
-  font-size:30px;
-}
-
-.rule{
-  margin:24px 0;
-
-  padding:18px;
-
-  border-left:2px solid #b75252;
-  background:rgba(183,82,82,.06);
-
-  color:#ddd;
-}
-
-.route-step{
-  display:flex;
-  gap:20px;
-
-  padding:17px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.step-num{
-  color:var(--gold);
-  font-family:Georgia,serif;
-  font-size:28px;
-}
-
-.route-step p{
-  color:var(--muted);
-}
-
-/* ================= CHAPTERS ================= */
-
-.chapter-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.chapter{
-  border-top:1px solid var(--gold);
-  padding:28px 0;
-}
-
-.chapter small{
-  color:var(--gold);
-  letter-spacing:2px;
-}
-
-.chapter h3{
-  font-family:Georgia,serif;
-  font-size:27px;
-  margin:10px 0;
-}
-
-.chapter p{
-  color:var(--muted);
-}
-
-/* ================= ARCHIVE ================= */
-
-.archive{
-  margin-top:90px;
-
-  padding:90px 8%;
-
-  background:
-  linear-gradient(130deg,#101720,#080b10);
-
-  border-top:1px solid var(--line);
-}
-
-.archive-inner{
-  max-width:1000px;
-  margin:auto;
-  text-align:center;
-}
-
-.archive h2{
-  font-family:Georgia,serif;
-  font-size:55px;
-  font-weight:400;
-}
-
-.archive p{
-  max-width:600px;
-  margin:20px auto;
-  color:var(--muted);
-}
-
-/* ================= FOOTER ================= */
-
+.archive-inner{max-width:720px;margin:0 auto;padding-top:120px}
+.archive h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,4.4vw,48px);line-height:1.2;margin:18px 0}
+.archive p{color:var(--muted);margin-bottom:30px}
 footer{
-  padding:45px 8%;
-
-  border-top:1px solid var(--line);
-
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-
-  color:#6f7781;
-  font-size:12px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  padding:26px var(--gutter);border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);
 }
 
-/* ================= MODAL ================= */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:2000;
-
-  display:none;
-  align-items:flex-start;
-  justify-content:center;
-
-  background:rgba(0,0,0,.82);
-  backdrop-filter:blur(12px);
-
-  padding:40px 20px;
-  overflow-y:auto;
+/* ---------- DOSSIER (dialog) ---------- */
+dialog{
+  margin:auto;border:none;padding:0;background:transparent;color:var(--text);
+  width:min(980px,calc(100vw - 32px));max-height:calc(100dvh - 32px);
 }
-
-.modal.active{
-  display:flex;
+dialog::backdrop{background:rgba(3,4,18,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+dialog[open] .dossier{animation:open .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes open{from{opacity:0;transform:translateY(16px) scale(.98)}}
+.dossier{
+  display:grid;grid-template-columns:.9fr 1.1fr;max-height:calc(100dvh - 32px);overflow:auto;
+  background:linear-gradient(160deg,#141040 0%,#0a0c2a 60%,#070822 100%);
 }
-
-.modal-box{
-  max-width:610px;
-  width:100%;
-  background:#10161e;
-  border:1px solid rgba(211,174,98,.3);
-  position:relative;
-  overflow:hidden;
-  animation:modal .25s ease;
+.d-visual{position:relative;padding:20px;display:flex;align-items:center;justify-content:center}
+.d-visual .arch{width:100%;max-width:380px;aspect-ratio:3/4}
+.d-visual .arch img{object-position:28% 15%}
+.d-visual .arch.banner{border-radius:12px}
+.d-visual .arch.banner img{object-position:center}
+.d-visual .scan{
+  position:absolute;left:20px;right:20px;height:2px;top:20px;
+  background:var(--aura);box-shadow:0 0 16px 2px var(--aura);opacity:0;
 }
-
-.modal-box.has-image{
-  max-width:1120px;
-  display:grid;
-  grid-template-columns:minmax(330px,.9fr) minmax(360px,1.1fr);
+dialog[open] .scan{animation:scan 1.3s ease-out .15s}
+@keyframes scan{0%{opacity:1;top:20px}100%{opacity:0;top:calc(100% - 20px)}}
+.d-logo{position:absolute;right:28px;bottom:28px;width:72px;height:72px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,0,0,.8))}
+.d-body{padding:clamp(24px,4vw,40px);position:relative}
+.d-close{
+  position:absolute;right:16px;top:16px;width:40px;height:40px;border-radius:50%;cursor:pointer;
+  border:1px solid var(--line);background:var(--glass);font-size:20px;line-height:1;
 }
+.d-close:hover{border-color:var(--aura);color:var(--aura)}
+.d-role{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--aura);text-transform:uppercase;padding-right:48px}
+.d-body h2{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3.2vw,34px);line-height:1.2;margin:10px 0 14px}
+.d-desc{color:#cfd0e6}
+.d-quote{margin:20px 0;padding:14px 18px;border-left:2px solid var(--gold);font-family:var(--serif);color:var(--gold);font-size:17px;line-height:1.5;background:rgba(232,198,126,.06);border-radius:0 10px 10px 0}
+.d-details{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+.d-details div{padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(5,6,26,.45)}
+.d-details small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.d-details span{font-size:14px}
 
-.modal-visual{
-  display:none;
-  background:#080b10;
+/* ---------- RESPONSIF ---------- */
+@media (max-width:1000px){
+  .campus-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(200px,42%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-width:thin}
+  .campus{scroll-snap-align:start}
+  .mata,.history,.room,.metro{grid-template-columns:1fr}
+  .chapters{grid-template-columns:1fr 1fr}
 }
-
-.modal-box.has-image .modal-visual{
-  display:block;
-}
-
-.modal-visual img{
-  display:block;
-  width:100%;
-  height:100%;
-  min-height:620px;
-  object-fit:cover;
-  object-position:top center;
-}
-
-.modal-content{
-  padding:42px;
-}
-
-@keyframes modal{
-  from{
-    transform:translateY(20px);
-    opacity:0;
-  }
-  to{
-    transform:translateY(0);
-    opacity:1;
-  }
-}
-
-.close-modal{
-  position:absolute;
-  right:20px;
-  top:15px;
-
-  background:none;
-  border:none;
-
-  color:#999;
-  font-size:25px;
-  z-index:3;
-  cursor:pointer;
-}
-
-.modal-role{
-  color:var(--gold);
-  letter-spacing:3px;
-  font-size:10px;
-  text-transform:uppercase;
-}
-
-.modal h2{
-  font-family:Georgia,serif;
-  font-size:42px;
-  margin:8px 0 17px;
-}
-
-.modal p{
-  color:#aeb5be;
-}
-
-.modal-quote{
-  margin-top:22px;
-  padding-left:18px;
-  border-left:1px solid var(--gold);
-  color:#d3c5aa;
-  font-family:Georgia,serif;
-  font-size:18px;
-  font-style:italic;
-}
-
-.modal-details{
-  margin-top:25px;
-
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.modal-detail{
-  border:1px solid var(--line);
-  padding:13px;
-}
-
-.modal-detail small{
-  display:block;
-  color:#69727d;
-}
-
-.modal-detail span{
-  color:#ddd;
-}
-
-/* ================= REVEAL ================= */
-
-.reveal{
-  opacity:0;
-  transform:translateY(30px);
-  transition:.7s;
-}
-
-.reveal.visible{
-  opacity:1;
-  transform:none;
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:1000px){
-
-  .campus-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .campus{
-    border-bottom:1px solid var(--line);
-  }
-
-  .history,
-  .mata-panel,
-  .room,
-  .metropoli{
-    grid-template-columns:1fr;
-  }
-
-  .characters,
-  .chapter-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .modal-box.has-image{
-    grid-template-columns:1fr;
-    max-width:720px;
-  }
-
-  .modal-visual img{
-    height:auto;
-    min-height:0;
-    max-height:72vh;
-    object-fit:contain;
-  }
-}
-
-@media(max-width:720px){
-
-  .nav{
-    padding:0 5%;
-  }
-
-  .menu-btn{
-    display:block;
-  }
-
+@media (max-width:760px){
+  .menu-btn{display:block}
   .nav-links{
-    display:none;
-
-    position:absolute;
-    top:72px;
-    left:0;
-
-    width:100%;
-    padding:25px;
-
-    flex-direction:column;
-
-    background:#080c11;
-    border-bottom:1px solid var(--line);
+    position:fixed;top:68px;left:0;right:0;flex-direction:column;gap:0;
+    padding:8px var(--gutter) 20px;background:rgba(7,8,34,.96);border-bottom:1px solid var(--line);
+    transform:translateY(-120%);transition:transform .3s;
   }
-
-  .nav-links.active{
-    display:flex;
-  }
-
-  .hero{
-    padding-left:6%;
-    padding-right:6%;
-  }
-
-  .hero h1{
-    font-size:65px;
-  }
-
-  .section{
-    padding:80px 6%;
-  }
-
-  .section-head{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .campus-grid,
-  .characters,
-  .chapter-grid{
-    grid-template-columns:1fr;
-  }
-
-  .rank-row{
-    grid-template-columns:30px 100px 1fr;
-  }
-
-  .score{
-    display:none;
-  }
-
-  .mata-panel{
-    padding:25px;
-  }
-
-  .modal{
-    padding:15px;
-  }
-
-  .modal-content{
-    padding:30px 24px;
-  }
-
-  .modal h2{
-    font-size:34px;
-  }
-
-  .modal-details{
-    grid-template-columns:1fr;
-  }
-
-  .beds{
-    grid-template-columns:1fr;
-  }
-
-  .room-visual{
-    min-height:450px;
-  }
-
-  footer{
-    flex-direction:column;
-  }
+  .nav-links.open{transform:none}
+  .nav-links a{padding:14px 0;border-bottom:1px solid var(--line)}
+  .hero{grid-template-columns:1fr;padding-top:96px;padding-bottom:250px;text-align:left}
+  .orbit{grid-row:1;width:min(260px,70vw);margin-bottom:-10px}
+  .palace{right:50%;transform:translateX(50%);width:88vw;bottom:96px;animation:none}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:14px}
+  .campus-grid{grid-auto-columns:72%}
+  .rank-row{grid-template-columns:22px 30px 1fr 64px;row-gap:6px}
+  .rank-row .bar{grid-column:2/-1}
+  .rank-row img{width:28px;height:28px}
+  .chapters{grid-template-columns:1fr}
+  .chars{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .char{padding:10px 10px 14px}
+  .char p{display:none}
+  .char h3{font-size:15px}
+  .dossier{grid-template-columns:1fr}
+  .d-visual .arch{max-width:240px}
+  .d-details{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
 }
 </style>
 </head>
-
 <body>
 
+<div class="sky" aria-hidden="true"></div>
+
 <!-- ================= NAV ================= -->
-
-<nav class="nav">
-
-  <a class="brand" href="#utama">
-    <span class="brand-mark">N</span>
+<nav class="nav" aria-label="Navigasi utama">
+  <a class="brand" href="#utama" aria-label="Niskala, ke atas">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="5" y="5" width="14" height="14"/><rect x="5" y="5" width="14" height="14" transform="rotate(45 12 12)"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></svg>
     NISKALA
   </a>
-
   <div class="nav-links" id="navLinks">
     <a href="#sejarah">Sejarah</a>
     <a href="#kampus">Kampus</a>
     <a href="#mata">Mata</a>
     <a href="#watak">Watak</a>
+    <a href="#bilik217">Bilik 217</a>
     <a href="#metropoli">Metropoli</a>
     <a href="#bab">Bab</a>
   </div>
-
-  <button class="menu-btn" id="menuBtn">☰</button>
-
+  <button class="menu-btn" id="menuBtn" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
 </nav>
 
-
 <!-- ================= HERO ================= -->
-
 <header class="hero" id="utama">
-
-  <div class="hero-content">
-
-    <div class="eyebrow">
-      Arkib Institusi • Akses Terhad
-    </div>
-
-    <h1>
-      NIS<span>KALA</span>
-    </h1>
-
-    <p class="hero-subtitle">
-      Sebuah institusi pendidikan yang tidak sekadar menilai
-      apa yang diketahui oleh seseorang, tetapi bagaimana mereka
-      melihat sesuatu yang tidak dilihat oleh orang lain.
-    </p>
-
+  <div class="hero-text">
+    <p class="eyebrow">Arkib Kayangan · Akses Terhad</p>
+    <h1>NISKALA</h1>
+    <p class="hero-sub-title">Ilmu milik bersama</p>
+    <p class="lead">Sebuah institusi pendidikan yang tidak sekadar menilai apa yang diketahui oleh seseorang, tetapi bagaimana mereka melihat sesuatu yang tidak dilihat oleh orang lain.</p>
     <div class="hero-actions">
-
-      <a href="#watak" class="btn btn-solid">
-        Teroka Watak
-      </a>
-
-      <a href="#sejarah" class="btn">
-        Buka Arkib
-      </a>
-
+      <a href="#watak" class="btn btn-solid">Teroka Watak →</a>
+      <a href="#sejarah" class="btn">Buka Arkib</a>
     </div>
-
   </div>
 
-  <div class="scroll-indicator">
-    ↓ TERUSKAN MEMBACA
+  <div class="orbit" aria-hidden="true">
+    <svg viewBox="-220 -220 440 440">
+      <defs>
+        <radialGradient id="moonFill" cx="40%" cy="35%" r="70%">
+          <stop offset="0" stop-color="#fff8e0"/>
+          <stop offset=".55" stop-color="#f0d08c"/>
+          <stop offset="1" stop-color="#a77f3f"/>
+        </radialGradient>
+        <mask id="crescent">
+          <rect x="-220" y="-220" width="440" height="440" fill="#fff"/>
+          <circle cx="34" cy="-22" r="68" fill="#000"/>
+        </mask>
+        <path id="ringPath" d="M0,-168 a168,168 0 1,1 0,336 a168,168 0 1,1 0,-336"/>
+      </defs>
+      <circle r="206" fill="none" stroke="rgba(139,233,255,.25)" stroke-dasharray="1 7"/>
+      <g class="spin">
+        <circle r="186" fill="none" stroke="rgba(232,198,126,.35)" stroke-dasharray="60 14 4 14"/>
+        <circle r="186" cy="0" cx="0" fill="none"/>
+        <circle cx="0" cy="-186" r="4" fill="#8be9ff"/>
+        <rect x="183" y="-3" width="6" height="6" transform="rotate(45 186 0)" fill="#e8c67e"/>
+      </g>
+      <g class="spin rev">
+        <text class="orbit-label"><textPath href="#ringPath">LIMA KAMPUS · SATU NISKALA · ILMU BUKAN MILIK SESEORANG · LIMA KAMPUS · SATU NISKALA ·</textPath></text>
+      </g>
+      <circle r="142" fill="none" stroke="rgba(196,168,255,.22)"/>
+      <circle r="142" fill="none" stroke="rgba(139,233,255,.6)" stroke-dasharray="40 852" class="spin" style="animation-duration:14s"/>
+      <g class="moon-glow">
+        <circle r="92" fill="url(#moonFill)" mask="url(#crescent)"/>
+      </g>
+      <g stroke="rgba(139,233,255,.5)" stroke-width="1">
+        <path d="M-220,0 h22 M198,0 h22 M0,-220 v22 M0,198 v22"/>
+      </g>
+    </svg>
   </div>
 
+  <!-- Istana terapung -->
+  <svg class="palace" viewBox="0 0 600 250" aria-hidden="true">
+    <defs>
+      <linearGradient id="pal" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#30276e"/>
+        <stop offset="1" stop-color="#0f0c32"/>
+      </linearGradient>
+      <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1c1748"/>
+        <stop offset="1" stop-color="#1c1748" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="M140,192 L460,192 L410,216 L340,246 L270,238 L196,214 Z" fill="url(#rock)"/>
+    <g fill="url(#pal)" stroke="#e8c67e" stroke-opacity=".55" stroke-width="1.2">
+      <rect x="132" y="180" width="336" height="13" rx="2"/>
+      <!-- pavilion kiri -->
+      <rect x="92" y="148" width="72" height="32"/>
+      <polygon points="80,152 128,112 176,152"/>
+      <!-- pavilion kanan -->
+      <rect x="436" y="148" width="72" height="32"/>
+      <polygon points="424,152 472,112 520,152"/>
+      <!-- dewan utama -->
+      <rect x="196" y="126" width="208" height="54"/>
+      <polygon points="168,132 300,88 432,132"/>
+      <polygon points="212,94 300,24 388,94"/>
+    </g>
+    <g stroke="#e8c67e" stroke-width="2" stroke-linecap="round">
+      <path d="M286,10 L314,38 M314,10 L286,38"/>
+      <path d="M118,100 L138,122 M138,100 L118,122"/>
+      <path d="M462,100 L482,122 M482,100 L462,122"/>
+    </g>
+    <g class="lamp" fill="#ffd98a">
+      <rect x="216" y="144" width="10" height="20" rx="5"/><rect x="246" y="144" width="10" height="20" rx="5"/>
+      <rect x="276" y="144" width="10" height="20" rx="5"/><rect x="314" y="144" width="10" height="20" rx="5"/>
+      <rect x="344" y="144" width="10" height="20" rx="5"/><rect x="374" y="144" width="10" height="20" rx="5"/>
+      <rect x="112" y="160" width="8" height="14" rx="4"/><rect x="136" y="160" width="8" height="14" rx="4"/>
+      <rect x="456" y="160" width="8" height="14" rx="4"/><rect x="480" y="160" width="8" height="14" rx="4"/>
+      <circle cx="300" cy="66" r="5"/>
+    </g>
+    <g fill="#8be9ff" opacity=".8">
+      <circle cx="232" cy="206" r="2"/><circle cx="300" cy="226" r="2.5"/><circle cx="368" cy="208" r="2"/>
+    </g>
+  </svg>
+
+  <!-- Awan larat -->
+  <div class="clouds" aria-hidden="true">
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <linearGradient id="cloudBack" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#7b6bd6" stop-opacity=".35"/>
+          <stop offset=".55" stop-color="#151244" stop-opacity=".95"/>
+          <stop offset="1" stop-color="#070822"/>
+        </linearGradient>
+        <linearGradient id="cloudFront" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#b6a4ff" stop-opacity=".28"/>
+          <stop offset=".5" stop-color="#0d0d33"/>
+          <stop offset="1" stop-color="#05061a"/>
+        </linearGradient>
+        <symbol id="cloudA" viewBox="0 0 1200 220" preserveAspectRatio="none">
+          <path fill="url(#cloudBack)" d="M0,120 C60,70 120,70 160,105 C190,60 270,55 300,100 C330,75 380,78 400,108 C440,50 540,48 570,100 C600,80 650,82 670,110 C720,60 800,62 830,104 C860,82 910,84 930,112 C980,58 1070,60 1100,104 C1130,86 1170,90 1200,120 L1200,220 L0,220 Z"/>
+          <g fill="none" stroke="#e8c67e" stroke-opacity=".35" stroke-width="1.4">
+            <path d="M262,72 a14,14 0 1,1 14,14 a7,7 0 1,1 -7,-7"/>
+            <path d="M520,62 a16,16 0 1,0 -16,16 a8,8 0 1,0 8,-8"/>
+            <path d="M1030,74 a14,14 0 1,1 14,14 a7,7 0 1,1 -7,-7"/>
+          </g>
+        </symbol>
+        <symbol id="cloudB" viewBox="0 0 1200 150" preserveAspectRatio="none">
+          <path fill="url(#cloudFront)" d="M0,80 C50,40 110,40 150,72 C200,30 280,32 320,76 C360,52 420,54 450,82 C500,36 590,36 630,78 C670,56 720,58 750,84 C800,40 880,40 920,78 C960,58 1010,60 1040,84 C1090,46 1160,50 1200,80 L1200,150 L0,150 Z"/>
+          <g fill="none" stroke="#8be9ff" stroke-opacity=".28" stroke-width="1.2">
+            <path d="M300,50 a12,12 0 1,1 12,12 a6,6 0 1,1 -6,-6"/>
+            <path d="M880,52 a12,12 0 1,0 -12,12 a6,6 0 1,0 6,-6"/>
+          </g>
+        </symbol>
+      </defs>
+    </svg>
+    <div class="cloud-track"><svg><use href="#cloudA"/></svg><svg><use href="#cloudA"/></svg></div>
+    <div class="cloud-track front"><svg><use href="#cloudB"/></svg><svg><use href="#cloudB"/></svg></div>
+  </div>
+
+  <a class="scroll-cue" href="#sejarah">TERUSKAN</a>
 </header>
 
+<main>
 
-<!-- ================= HISTORY ================= -->
-
+<!-- ================= 01 SEJARAH ================= -->
 <section class="section reveal" id="sejarah">
-
-  <div class="section-head">
-
+  <header class="sec-head">
     <div>
-      <span class="section-number">01 / ASAL USUL</span>
+      <p class="sec-idx">01 <i></i> ASAL USUL</p>
       <h2>Sejarah Niskala</h2>
+      <div class="orn"><span></span></div>
     </div>
-
-    <p class="section-intro">
-      Niskala tidak bermula sebagai sebuah kolej elit.
-      Ia bermula daripada sebuah lembah dan satu kepercayaan
-      bahawa ilmu tidak sepatutnya dimiliki seorang diri.
-    </p>
-
-  </div>
-
+    <p class="sec-intro">Niskala tidak bermula sebagai sebuah kolej elit. Ia bermula daripada sebuah lembah dan satu kepercayaan bahawa ilmu tidak sepatutnya dimiliki seorang diri.</p>
+  </header>
   <div class="history">
-
-    <div class="history-story">
-
-      <p>
-        Ratusan tahun dahulu, kawasan Niskala hanyalah sebuah
-        lembah yang didiami petani, pedagang, tukang dan
-        masyarakat kampung.
-      </p>
-
-      <p>
-        Mereka mempunyai satu budaya yang luar biasa.
-        Sesiapa yang keluar merantau mempunyai tanggungjawab
-        untuk membawa pulang sesuatu yang telah dipelajari.
-      </p>
-
-      <p>
-        Pengetahuan perdagangan, pembinaan, strategi,
-        bahasa, pembacaan dan pengalaman luar dikongsi
-        kepada masyarakat.
-      </p>
-
-      <div class="quote">
-        “Ilmu bukan milik seseorang.
-        Ilmu adalah milik bersama.”
-      </div>
-
+    <div class="story glass hud">
+      <p>Ratusan tahun dahulu, kawasan Niskala hanyalah sebuah lembah yang didiami petani, pedagang, tukang dan masyarakat kampung.</p>
+      <p>Mereka mempunyai satu budaya yang luar biasa. Sesiapa yang keluar merantau mempunyai tanggungjawab untuk membawa pulang sesuatu yang telah dipelajari.</p>
+      <p>Pengetahuan perdagangan, pembinaan, strategi, bahasa, pembacaan dan pengalaman luar dikongsi kepada masyarakat.</p>
+      <blockquote class="quote">“Ilmu bukan milik seseorang. Ilmu adalah milik bersama.”</blockquote>
     </div>
-
-
-    <div class="timeline">
-
-      <div class="time-item">
-        <small>Permulaan</small>
-        <h3>Lembah Niskala</h3>
-        <p>
-          Sebuah komuniti kecil membentuk budaya
-          perkongsian ilmu antara generasi.
-        </p>
-      </div>
-
-      <div class="time-item">
-        <small>Beberapa Generasi</small>
-        <h3>Kelahiran Tokoh</h3>
-        <p>
-          Lembah kecil itu mula menghasilkan pendidik,
-          pencipta, pentadbir dan pemikir.
-        </p>
-      </div>
-
-      <div class="time-item">
-        <small>Era Pengasas</small>
-        <h3>Lima Tokoh Pulang</h3>
-        <p>
-          Lima tokoh dari lembah kembali dan membina
-          sebuah institusi pendidikan.
-        </p>
-      </div>
-
-      <div class="time-item">
-        <small>Hari Ini</small>
-        <h3>Niskala</h3>
-        <p>
-          Institusi tersebut berkembang menjadi
-          lima kampus dengan ribuan pelajar.
-        </p>
-      </div>
-
-    </div>
-
+    <ol class="timeline" style="list-style:none">
+      <li class="t-item"><small>Permulaan</small><h3>Lembah Niskala</h3><p>Sebuah komuniti kecil membentuk budaya perkongsian ilmu antara generasi.</p></li>
+      <li class="t-item"><small>Beberapa Generasi</small><h3>Kelahiran Tokoh</h3><p>Lembah kecil itu mula menghasilkan pendidik, pencipta, pentadbir dan pemikir.</p></li>
+      <li class="t-item"><small>Era Pengasas</small><h3>Lima Tokoh Pulang</h3><p>Lima tokoh dari lembah kembali dan membina sebuah institusi pendidikan.</p></li>
+      <li class="t-item"><small>Hari Ini</small><h3>Niskala</h3><p>Institusi tersebut berkembang menjadi lima kampus dengan ribuan pelajar.</p></li>
+    </ol>
   </div>
-
 </section>
 
-
-<!-- ================= CAMPUSES ================= -->
-
+<!-- ================= 02 KAMPUS ================= -->
 <section class="section reveal" id="kampus">
-
-  <div class="section-head">
-
+  <header class="sec-head">
     <div>
-      <span class="section-number">02 / LIMA KAMPUS</span>
+      <p class="sec-idx">02 <i></i> LIMA KAMPUS</p>
       <h2>Lima nama.<br>Satu Niskala.</h2>
+      <div class="orn"><span></span></div>
     </div>
-
-    <p class="section-intro">
-      Setiap kampus mempunyai sejarah, tradisi,
-      komuniti dan persaingan tersendiri.
-      Tiada kampus dikhaskan untuk satu jenis kebolehan.
-    </p>
-
-  </div>
-
-
-  <div class="campus-grid">
-
-    <article
-      class="campus"
-      style="--campus:var(--tuah)"
-      role="button"
-      tabindex="0"
-      aria-label="Buka profil Kampus Tuah"
-      onclick="showCampus('Tuah')"
-      onkeydown="openCampusFromKeyboard(event,'Tuah')">
-
-      <div class="campus-media">
-        <img class="campus-banner" src="assets/campuses/posters/tuah-banner.png" alt="Panji realistik Kampus Tuah" loading="lazy" decoding="async">
-        <img class="campus-logo" src="assets/campuses/tuah-logo.png" alt="Logo Kampus Tuah" loading="lazy" decoding="async">
-      </div>
-
-      <div class="campus-content">
-        <div class="campus-rank">01</div>
-        <h3>TUAH</h3>
-
-        <p>
-          Kedudukan semasa tertinggi
-          dalam sistem Mata Niskala.
-        </p>
-      </div>
-
-    </article>
-
-
-    <article
-      class="campus"
-      style="--campus:var(--mahawangsa)"
-      role="button"
-      tabindex="0"
-      aria-label="Buka profil Kampus Mahawangsa"
-      onclick="showCampus('Mahawangsa')"
-      onkeydown="openCampusFromKeyboard(event,'Mahawangsa')">
-
-      <div class="campus-media">
-        <img class="campus-banner" src="assets/campuses/posters/mahawangsa-banner.png" alt="Panji realistik Kampus Mahawangsa" loading="lazy" decoding="async">
-        <img class="campus-logo" src="assets/campuses/mahawangsa-logo.png" alt="Logo Kampus Mahawangsa" loading="lazy" decoding="async">
-      </div>
-
-      <div class="campus-content">
-        <div class="campus-rank">02</div>
-        <h3>MAHAWANGSA</h3>
-
-        <p>
-          Kampus Faiz, Harith dan Danish.
-          Bilik 217 berada di sini.
-        </p>
-      </div>
-
-    </article>
-
-
-    <article
-      class="campus"
-      style="--campus:var(--indera)"
-      role="button"
-      tabindex="0"
-      aria-label="Buka profil Kampus Inderaputera"
-      onclick="showCampus('Inderaputera')"
-      onkeydown="openCampusFromKeyboard(event,'Inderaputera')">
-
-      <div class="campus-media">
-        <img class="campus-banner" src="assets/campuses/posters/inderaputera-banner.png" alt="Panji realistik Kampus Inderaputera" loading="lazy" decoding="async">
-        <img class="campus-logo" src="assets/campuses/inderaputera-logo.png" alt="Logo Kampus Inderaputera" loading="lazy" decoding="async">
-      </div>
-
-      <div class="campus-content">
-        <div class="campus-rank">03</div>
-        <h3>INDERAPUTERA</h3>
-
-        <p>
-          Salah satu daripada lima komuniti
-          utama Niskala.
-        </p>
-      </div>
-
-    </article>
-
-
-    <article
-      class="campus"
-      style="--campus:var(--malim)"
-      role="button"
-      tabindex="0"
-      aria-label="Buka profil Kampus Malim"
-      onclick="showCampus('Malim')"
-      onkeydown="openCampusFromKeyboard(event,'Malim')">
-
-      <div class="campus-media">
-        <img class="campus-banner" src="assets/campuses/posters/malim-banner.png" alt="Panji realistik Kampus Malim" loading="lazy" decoding="async">
-        <img class="campus-logo" src="assets/campuses/malim-logo.png" alt="Logo Kampus Malim" loading="lazy" decoding="async">
-      </div>
-
-      <div class="campus-content">
-        <div class="campus-rank">04</div>
-        <h3>MALIM</h3>
-
-        <p>
-          Kemudahan mula menunjukkan kesan
-          kedudukan rendah dalam sistem mata.
-        </p>
-      </div>
-
-    </article>
-
-
-    <article
-      class="campus"
-      style="--campus:var(--sulung)"
-      role="button"
-      tabindex="0"
-      aria-label="Buka profil Kampus Sulung"
-      onclick="showCampus('Sulung')"
-      onkeydown="openCampusFromKeyboard(event,'Sulung')">
-
-      <div class="campus-media">
-        <img class="campus-banner" src="assets/campuses/posters/sulung-banner.png" alt="Panji realistik Kampus Sulung" loading="lazy" decoding="async">
-        <img class="campus-logo" src="assets/campuses/sulung-logo.png" alt="Logo Kampus Sulung" loading="lazy" decoding="async">
-      </div>
-
-      <div class="campus-content">
-        <div class="campus-rank">05</div>
-        <h3>SULUNG</h3>
-
-        <p>
-          Kampus dengan peruntukan paling
-          terhad pada kedudukan semasa.
-        </p>
-      </div>
-
-    </article>
-
-  </div>
-
+    <p class="sec-intro">Setiap kampus mempunyai sejarah, tradisi, komuniti dan persaingan tersendiri. Tiada kampus dikhaskan untuk satu jenis kebolehan.</p>
+  </header>
+  <div class="campus-grid" id="campusGrid"></div>
 </section>
 
-
-<!-- ================= MATA ================= -->
-
+<!-- ================= 03 MATA ================= -->
 <section class="section reveal" id="mata">
-
-  <div class="section-head">
-
+  <header class="sec-head">
     <div>
-      <span class="section-number">03 / SISTEM</span>
+      <p class="sec-idx">03 <i></i> SISTEM</p>
       <h2>Mata Niskala</h2>
+      <div class="orn"><span></span></div>
     </div>
-
+  </header>
+  <div class="mata glass hud">
+    <div>
+      <h3>Kedudukan bukan sekadar nombor.</h3>
+      <p>Setiap mahasiswa mempunyai Mata Individu. Prestasi tertentu juga boleh menyumbang kepada Mata Kampus.</p>
+      <p>Akademik, projek, pertandingan, aktiviti, pencapaian dan tugasan tertentu boleh memberikan mata.</p>
+      <div class="tags">
+        <span class="tag">Akademik</span><span class="tag">Projek</span><span class="tag">Pertandingan</span><span class="tag">Aktiviti</span><span class="tag">Cabaran</span>
+      </div>
+    </div>
+    <div class="ranks" id="ranks" aria-label="Kedudukan semasa Mata Kampus"></div>
   </div>
-
-
-  <div class="mata-panel">
-
-    <div class="mata-description">
-
-      <h3>
-        Kedudukan bukan sekadar nombor.
-      </h3>
-
-      <p>
-        Setiap mahasiswa mempunyai Mata Individu.
-        Prestasi tertentu juga boleh menyumbang
-        kepada Mata Kampus.
-      </p>
-
-      <p>
-        Akademik, projek, pertandingan, aktiviti,
-        pencapaian dan tugasan tertentu boleh
-        memberikan mata.
-      </p>
-
-      <div class="mata-tags">
-
-        <span class="tag">Akademik</span>
-        <span class="tag">Projek</span>
-        <span class="tag">Pertandingan</span>
-        <span class="tag">Aktiviti</span>
-        <span class="tag">Cabaran</span>
-
-      </div>
-
-    </div>
-
-
-    <div class="rankings">
-
-      <div class="rank-row">
-        <span class="rank-num">1</span>
-        <span>Tuah</span>
-
-        <div class="bar">
-          <span
-            style="
-            --width:100%;
-            --color:var(--tuah)">
-          </span>
-        </div>
-
-        <span class="score">10,500</span>
-      </div>
-
-
-      <div class="rank-row">
-        <span class="rank-num">2</span>
-        <span>Mahawangsa</span>
-
-        <div class="bar">
-          <span
-            style="
-            --width:94%;
-            --color:var(--mahawangsa)">
-          </span>
-        </div>
-
-        <span class="score">9,850</span>
-      </div>
-
-
-      <div class="rank-row">
-        <span class="rank-num">3</span>
-        <span>Inderaputera</span>
-
-        <div class="bar">
-          <span
-            style="
-            --width:84%;
-            --color:var(--indera)">
-          </span>
-        </div>
-
-        <span class="score">8,900</span>
-      </div>
-
-
-      <div class="rank-row">
-        <span class="rank-num">4</span>
-        <span>Malim</span>
-
-        <div class="bar">
-          <span
-            style="
-            --width:78%;
-            --color:var(--malim)">
-          </span>
-        </div>
-
-        <span class="score">8,300</span>
-      </div>
-
-
-      <div class="rank-row">
-        <span class="rank-num">5</span>
-        <span>Sulung</span>
-
-        <div class="bar">
-          <span
-            style="
-            --width:68%;
-            --color:var(--sulung)">
-          </span>
-        </div>
-
-        <span class="score">7,550</span>
-      </div>
-
-    </div>
-
-  </div>
-
 </section>
 
-
-<!-- ================= CHARACTERS ================= -->
-
+<!-- ================= 04 WATAK ================= -->
 <section class="section reveal" id="watak">
-
-  <div class="section-head">
-
+  <header class="sec-head">
     <div>
-      <span class="section-number">04 / ARKIB INDIVIDU</span>
+      <p class="sec-idx">04 <i></i> ARKIB INDIVIDU</p>
       <h2>Watak</h2>
+      <div class="orn"><span></span></div>
     </div>
-
-    <p class="section-intro">
-      Pilih mana-mana watak untuk membuka
-      rekod mereka.
-    </p>
-
+    <p class="sec-intro">Pilih mana-mana watak untuk membuka dossier mereka.</p>
+  </header>
+  <div class="toolbar" role="search">
+    <input id="charSearch" class="search" type="search" placeholder="Cari nama watak..." aria-label="Cari watak">
+    <button class="chip" data-filter="all" aria-pressed="true">Semua</button>
+    <button class="chip" data-filter="student" aria-pressed="false">Pelajar</button>
+    <button class="chip" data-filter="staff" aria-pressed="false">Pensyarah</button>
+    <button class="chip" data-filter="other" aria-pressed="false">Lain-lain</button>
   </div>
-
-
-  <div class="character-toolbar">
-
-    <input
-      id="characterSearch"
-      class="search"
-      type="text"
-      placeholder="Cari nama watak..."
-    >
-
-    <button
-      class="filter-btn active"
-      data-filter="all">
-      Semua
-    </button>
-
-    <button
-      class="filter-btn"
-      data-filter="student">
-      Pelajar
-    </button>
-
-    <button
-      class="filter-btn"
-      data-filter="staff">
-      Pensyarah
-    </button>
-
-  </div>
-
-
-  <div class="characters" id="characterGrid">
-
-    <!-- generated with JS -->
-
-  </div>
-
+  <div class="chars" id="charGrid" aria-live="polite"></div>
 </section>
 
-
-<!-- ================= ROOM 217 ================= -->
-
-<section class="section reveal">
-
-  <div class="section-head">
-
+<!-- ================= 05 BILIK 217 ================= -->
+<section class="section reveal" id="bilik217">
+  <header class="sec-head">
     <div>
-      <span class="section-number">05 / MAHAWANGSA</span>
+      <p class="sec-idx">05 <i></i> MAHAWANGSA</p>
       <h2>Bilik 217</h2>
+      <div class="orn"><span></span></div>
     </div>
-
-  </div>
-
-
+  </header>
   <div class="room">
-
-    <div class="room-visual">
-
+    <div class="room-visual glass hud">
       <div class="room-no">217</div>
-
       <div class="beds">
-
-        <div class="bed">
-          <small>KATIL 01</small>
-          <strong>Harith</strong>
-        </div>
-
-        <div class="bed">
-          <small>KATIL 02</small>
-          <strong>Faiz</strong>
-        </div>
-
-        <div class="bed">
-          <small>KATIL 03</small>
-          <strong>Danish</strong>
-        </div>
-
+        <div class="bed"><small>KATIL 01</small><strong>Harith</strong></div>
+        <div class="bed"><small>KATIL 02</small><strong>Faiz</strong></div>
+        <div class="bed"><small>KATIL 03</small><strong>Danish</strong></div>
       </div>
-
     </div>
-
-
     <div class="room-info">
-
-      <span class="eyebrow">
-        Mahawangsa / Tingkat 2
-      </span>
-
-      <h3>
-        Tiga pelajar.<br>
-        Tiga cara melihat dunia.
-      </h3>
-
-      <p>
-        Mereka baru mengenali satu sama lain
-        ketika ditempatkan di bilik yang sama.
-        Pada pandangan pertama, tiada seorang pun
-        kelihatan seperti genius luar biasa yang
-        sering dikaitkan dengan Niskala.
-      </p>
-
-      <p>
-        Tetapi sedikit demi sedikit, perkara kecil
-        mula menunjukkan bahawa setiap seorang
-        mempunyai sesuatu yang tidak biasa.
-      </p>
-
+      <p class="eyebrow">Mahawangsa / Tingkat 2</p>
+      <h3>Tiga pelajar.<br>Tiga cara melihat dunia.</h3>
+      <p>Mereka baru mengenali satu sama lain ketika ditempatkan di bilik yang sama. Pada pandangan pertama, tiada seorang pun kelihatan seperti genius luar biasa yang sering dikaitkan dengan Niskala.</p>
+      <p>Tetapi sedikit demi sedikit, perkara kecil mula menunjukkan bahawa setiap seorang mempunyai sesuatu yang tidak biasa.</p>
     </div>
-
   </div>
-
 </section>
 
-
-<!-- ================= METROPOLI ================= -->
-
+<!-- ================= 06 METROPOLI ================= -->
 <section class="section reveal" id="metropoli">
-
-  <div class="section-head">
-
+  <header class="sec-head">
     <div>
-      <span class="section-number">06 / SIMULASI 01</span>
+      <p class="sec-idx">06 <i></i> SIMULASI 01</p>
       <h2>Metropoli</h2>
+      <div class="orn"><span></span></div>
     </div>
-
-    <p class="section-intro">
-      Lima orang awam terperangkap.
-      Kebanyakan pelajar cuba mencari jalan turun.
-      Kumpulan Faiz memilih arah bertentangan.
-    </p>
-
+    <p class="sec-intro">Lima orang awam terperangkap. Kebanyakan pelajar cuba mencari jalan turun. Kumpulan Faiz memilih arah bertentangan.</p>
+  </header>
+  <div class="metro">
+    <div class="building glass hud" aria-label="Pelan Bangunan Metropoli">
+      <div class="floor top">
+        <span class="floor-no">03</span>
+        <span class="secret">△ tangga kecil</span>
+        <div><h4>Kawasan Pentadbiran</h4><p>Pejabat • Bilik mesyuarat • Bilik fail</p></div>
+      </div>
+      <div class="floor">
+        <span class="floor-no">02</span>
+        <div><h4>Pusat Beli-Belah</h4><p>Butik • Kiosk • Ruang legar</p>
+          <div class="people"><b></b><b></b><b></b><b></b><b></b> LIMA ORANG TERPERANGKAP</div></div>
+      </div>
+      <div class="floor fire">
+        <span class="floor-no">01</span>
+        <div><h4>Food Court</h4><p>Kawasan kebakaran</p></div>
+      </div>
+    </div>
+    <div class="route glass">
+      <p class="eyebrow">Penyelesaian Kumpulan Faiz</p>
+      <h3>Jangan turun.<br><em>Naik.</em></h3>
+      <div class="rule">TANGGA TIDAK BOLEH DIGUNAKAN UNTUK TURUN KE BAWAH.</div>
+      <ol class="steps">
+        <li><span>Lima orang bergerak dari Tingkat 2 menuju tangga utama.</span></li>
+        <li><span>Mereka menggunakan tangga untuk <strong>naik</strong> ke Tingkat 3.</span></li>
+        <li><span>Tangga kecil di kawasan pentadbiran membawa mereka ke bahagian bumbung.</span></li>
+        <li><span>Maklumat visual yang diingati Harith menunjukkan sambungan ke bangunan bersebelahan.</span></li>
+        <li><span>Kelima-lima orang meninggalkan Bangunan Metropoli tanpa turun melalui tangga.</span></li>
+      </ol>
+    </div>
   </div>
-
-
-  <div class="metropoli">
-
-    <div class="building">
-
-      <div class="floor">
-
-        <div class="floor-number">
-          03
-        </div>
-
-        <span class="secret">
-          △ tangga kecil
-        </span>
-
-        <div class="floor-details">
-          <h4>Kawasan Pentadbiran</h4>
-          <p>
-            Pejabat • Bilik mesyuarat • Bilik fail
-          </p>
-        </div>
-
-      </div>
-
-
-      <div class="floor">
-
-        <div class="floor-number">
-          02
-        </div>
-
-        <div class="floor-details">
-
-          <h4>Pusat Beli-Belah</h4>
-
-          <p>
-            Butik • Kiosk • Ruang legar
-          </p>
-
-          <div class="people">
-            ● ● ● ● ●
-            LIMA ORANG TERPERANGKAP
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="floor">
-
-        <div class="floor-number">
-          01
-        </div>
-
-        <div class="floor-details">
-          <h4>Food Court</h4>
-
-          <p>
-            Kawasan kebakaran
-          </p>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="route-panel">
-
-      <span class="eyebrow">
-        Penyelesaian Kumpulan Faiz
-      </span>
-
-      <h3>
-        Jangan turun.
-        Naik.
-      </h3>
-
-      <div class="rule">
-        TANGGA TIDAK BOLEH DIGUNAKAN
-        UNTUK TURUN KE BAWAH.
-      </div>
-
-
-      <div class="route-step">
-
-        <span class="step-num">01</span>
-
-        <p>
-          Lima orang bergerak dari Tingkat 2
-          menuju tangga utama.
-        </p>
-
-      </div>
-
-
-      <div class="route-step">
-
-        <span class="step-num">02</span>
-
-        <p>
-          Mereka menggunakan tangga untuk
-          <strong>naik</strong> ke Tingkat 3.
-        </p>
-
-      </div>
-
-
-      <div class="route-step">
-
-        <span class="step-num">03</span>
-
-        <p>
-          Tangga kecil di kawasan pentadbiran
-          membawa mereka ke bahagian bumbung.
-        </p>
-
-      </div>
-
-
-      <div class="route-step">
-
-        <span class="step-num">04</span>
-
-        <p>
-          Maklumat visual yang diingati Harith
-          menunjukkan sambungan ke bangunan
-          bersebelahan.
-        </p>
-
-      </div>
-
-
-      <div class="route-step">
-
-        <span class="step-num">05</span>
-
-        <p>
-          Kelima-lima orang meninggalkan
-          Bangunan Metropoli tanpa turun
-          melalui tangga.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
 </section>
 
-
-<!-- ================= CHAPTERS ================= -->
-
+<!-- ================= 07 BAB ================= -->
 <section class="section reveal" id="bab">
-
-  <div class="section-head">
-
+  <header class="sec-head">
     <div>
-      <span class="section-number">07 / REKOD CERITA</span>
+      <p class="sec-idx">07 <i></i> REKOD CERITA</p>
       <h2>Bab Semasa</h2>
+      <div class="orn"><span></span></div>
     </div>
-
-  </div>
-
-
-  <div class="chapter-grid">
-
-    <article class="chapter">
-
-      <small>BAB 01</small>
-
-      <h3>
-        Pemerhatian
-      </h3>
-
-      <p>
-        Kehidupan biasa Faiz berubah apabila
-        satu ujian mengejut membawa Dr. Zafran
-        kepada nama yang sudah lama berada
-        dalam pemerhatian Niskala.
-      </p>
-
-    </article>
-
-
-    <article class="chapter">
-
-      <small>BAB 02</small>
-
-      <h3>
-        Ketibaan
-      </h3>
-
-      <p>
-        Faiz menaiki bas tanpa mengetahui
-        lokasi sebenar Niskala sebelum
-        ditempatkan di Mahawangsa dan
-        bertemu Harith serta Danish.
-      </p>
-
-    </article>
-
-
-    <article class="chapter">
-
-      <small>BAB 03</small>
-
-      <h3>
-        Cara Melihat
-      </h3>
-
-      <p>
-        Simulasi Metropoli mula menunjukkan
-        cara Faiz melihat masalah, sementara
-        sistem Mata Niskala memperlihatkan
-        kesannya terhadap lima kampus.
-      </p>
-
-    </article>
-
-  </div>
-
+  </header>
+  <div class="chapters" id="chapterGrid"></div>
 </section>
 
-
-<!-- ================= ARCHIVE ================= -->
-
-<section class="archive">
-
+<!-- ================= PENUTUP ================= -->
+<section class="archive reveal">
   <div class="archive-inner">
-
-    <span class="eyebrow">
-      Fail Belum Lengkap
-    </span>
-
-    <h2>
-      Masih banyak perkara
-      yang Niskala belum ceritakan.
-    </h2>
-
-    <p>
-      Mengapa Faiz sudah berada dalam pemerhatian
-      sebelum Dr. Zafran mencalonkannya?
-      Bagaimana Niskala memilih pelajarnya?
-      Dan apakah tujuan sebenar sistem yang
-      mengawal kehidupan lima kampus?
-    </p>
-
-    <a href="#utama" class="btn">
-      Kembali ke Atas
-    </a>
-
+    <p class="eyebrow">Fail Belum Lengkap</p>
+    <h2>Masih banyak perkara yang Niskala belum ceritakan.</h2>
+    <p>Mengapa Faiz sudah berada dalam pemerhatian sebelum Dr. Zafran mencalonkannya? Bagaimana Niskala memilih pelajarnya? Dan apakah tujuan sebenar sistem yang mengawal kehidupan lima kampus?</p>
+    <a href="#utama" class="btn">↑ Kembali ke Atas</a>
   </div>
-
 </section>
 
+</main>
 
 <footer>
-
-  <div>
-    NISKALA ARCHIVE
-  </div>
-
-  <div>
-    Novel World Database • Versi 01
-  </div>
-
+  <span>NISKALA · ARKIB KAYANGAN</span>
+  <span>Pangkalan Data Dunia Novel · Versi 02</span>
 </footer>
 
-
-<!-- ================= MODAL ================= -->
-
-<div class="modal" id="modal">
-
-  <div class="modal-box">
-
-    <button
-      class="close-modal"
-      onclick="closeModal()">
-      ×
-    </button>
-
-    <div class="modal-visual" id="modalVisual">
-      <img id="modalImage" src="" alt="">
+<!-- ================= DOSSIER ================= -->
+<dialog id="dossier" aria-labelledby="dName">
+  <div class="dossier glass">
+    <div class="d-visual">
+      <div class="arch" id="dFrame"></div>
+      <img class="d-logo" id="dLogo" alt="" hidden>
+      <div class="scan"></div>
     </div>
-
-    <div class="modal-content">
-      <div
-        class="modal-role"
-        id="modalRole">
-      </div>
-
-      <h2 id="modalName"></h2>
-
-      <p id="modalDescription"></p>
-
-      <div class="modal-quote" id="modalQuote"></div>
-
-      <div
-        class="modal-details"
-        id="modalDetails">
-      </div>
-
+    <div class="d-body">
+      <form method="dialog"><button class="d-close" aria-label="Tutup dossier">×</button></form>
+      <p class="d-role" id="dRole"></p>
+      <h2 id="dName"></h2>
+      <p class="d-desc" id="dDesc"></p>
+      <blockquote class="d-quote" id="dQuote"></blockquote>
+      <div class="d-details" id="dDetails"></div>
     </div>
-
   </div>
+</dialog>
 
-</div>
-
-
+<script src="data.js"></script>
 <script>
-/* =========================
-   CHARACTER DATABASE
-   ========================= */
+(() => {
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const fmt = n => n.toLocaleString("en-US");
 
-const characters = [
-
-  {
-    name:"Faiz Arsyad bin Irsyadi",
-    short:"Faiz",
-    category:"student",
-    role:"Mahasiswa • Mahawangsa",
-    image:"assets/characters/faiz-arsyad.png",
-    quote:"Bukan semua jawapan perlu dicari dengan suara yang kuat.",
-    description:
-      "Watak utama Niskala yang kelihatan terlalu tenang untuk seseorang yang dipilih oleh institusi itu. Jarang cuba menonjolkan diri, tetapi sering melihat masalah dari sudut yang tidak difikirkan orang lain.",
-    details:{
-      Umur:"21",
-      Status:"Pelajar Niskala",
-      Kampus:"Mahawangsa",
-      Bilik:"217",
-      Sifat:"Pemerhati • Analitikal • Tenang",
-      Mata:"4",
-      Catatan:"Dalam pemerhatian Niskala sebelum pencalonan"
-    }
-  },
-
-  {
-    name:"Harith Zaim bin Rahman",
-    short:"Harith",
-    category:"student",
-    role:"Mahasiswa • Mahawangsa",
-    image:"assets/characters/harith-zaim.png",
-    quote:"Perkara kecil kadang-kadang menyimpan jalan keluar yang paling besar.",
-    description:
-      "Rakan sebilik Faiz yang tenang dan tidak banyak bercakap. Dalam simulasi Metropoli, Harith mengingati satu butiran kecil daripada gambar yang pernah ditunjukkan Prof. Zaizul.",
-    details:{
-      Umur:"21",
-      Status:"Pelajar Niskala",
-      Kampus:"Mahawangsa",
-      Bilik:"217",
-      Sifat:"Teliti • Pendiam • Berfokus",
-      Pemerhatian:"Ingatan visual luar biasa",
-      Catatan:"Keupayaan sebenar belum diketahui"
-    }
-  },
-
-  {
-    name:"Danish Raiyyan bin Safuan",
-    short:"Danish",
-    category:"student",
-    role:"Mahasiswa • Mahawangsa",
-    image:"assets/characters/danish-raiyyan.png",
-    quote:"Kadang-kadang benda rosak cuma tunggu orang yang faham cara ia bernafas.",
-    description:
-      "Rakan sebilik Faiz yang spontan dan mudah mesra. Beberapa tindakan kecil menunjukkan dia mempunyai pemahaman semula jadi terhadap struktur dan benda mekanikal.",
-    details:{
-      Umur:"21",
-      Status:"Pelajar Niskala",
-      Kampus:"Mahawangsa",
-      Bilik:"217",
-      Sifat:"Spontan • Mesra • Praktikal",
-      Pemerhatian:"Cenderung memahami mekanikal",
-      Catatan:"Sangat menghargai ayam kafeteria"
-    }
-  },
-
-  {
-    name:"Dr. Zafran Hakimi bin Iskandar",
-    short:"Zafran",
-    category:"staff",
-    role:"Pensyarah • Alumni Niskala",
-    image:"assets/characters/dr-zafran.png",
-    quote:"Ada rahsia yang lebih selamat jika hanya tinggal di dalam kepala.",
-    description:
-      "Pensyarah universiti lama Faiz dan bekas mahasiswa Niskala. Selepas menyedari bahawa Faiz mengetahui sesuatu yang sepatutnya tersembunyi, dia cuba mencalonkan Faiz kepada Niskala.",
-    details:{
-      Umur:"44",
-      Status:"Pensyarah Universiti",
-      Sifat:"Berhati-hati • Cerdik • Tertekan",
-      Hubungan:"Pensyarah Faiz",
-      Pencalonan:"Ditolak oleh sistem",
-      Mesej:"Calon telah berada dalam pemerhatian",
-      Rahsia:"Hubungan sulit dengan Azlina"
-    }
-  },
-
-  {
-    name:"Prof. Zaizul Azman bin Salleh",
-    short:"Zaizul",
-    category:"staff",
-    role:"Profesor • Niskala",
-    image:"assets/characters/prof-zaizul.png",
-    quote:"Saya tidak mencari jawapan yang paling cepat. Saya mencari cara fikir yang paling jujur.",
-    description:
-      "Pensyarah yang menerangkan sejarah Niskala dan kemudian memberikan simulasi Bangunan Metropoli kepada pelajar daripada lima kampus.",
-    details:{
-      Umur:"58",
-      Status:"Profesor Niskala",
-      Sifat:"Intelektual • Tenang • Menilai",
-      Institusi:"Niskala",
-      Aktiviti:"Simulasi Metropoli",
-      MarkahFaiz:"96 / 100",
-      Prinsip:"Cara berfikir lebih penting daripada hafalan"
-    }
-  },
-
-  {
-    name:"Arman Firdaus bin Halim",
-    short:"Arman",
-    category:"student",
-    role:"Mahasiswa • Tuah",
-    image:"assets/characters/arman-firdaus.png",
-    quote:"Kalau jalan itu wujud, kita cari. Kalau tak wujud, kita bina pilihan terbaik.",
-    description:
-      "Ahli kumpulan Faiz dalam simulasi Metropoli. Cepat bertindak dan cenderung mencari penyelesaian yang boleh dilaksanakan dengan segera.",
-    details:{
-      Umur:"21",
-      Status:"Pelajar Niskala",
-      Kampus:"Tuah",
-      Aktiviti:"Simulasi Metropoli",
-      Kumpulan:"Faiz • Harith • Danish • Nadhira",
-      Sifat:"Yakin • Proaktif • Cepat bertindak"
-    }
-  },
-
-  {
-    name:"Nadhira Sofea binti Mahfuz",
-    short:"Nadhira",
-    category:"student",
-    role:"Mahasiswa • Inderaputera",
-    image:"assets/characters/nadhira-sofea.png",
-    quote:"Ketelitian bukan kelewatan. Ketelitian ialah cara kita mengelakkan kesilapan daripada menjadi bencana.",
-    description:
-      "Ahli kumpulan Faiz dalam simulasi Metropoli. Lebih tenang dan berhati-hati ketika menilai setiap pilihan yang dicadangkan oleh kumpulan.",
-    details:{
-      Umur:"21",
-      Status:"Pelajar Niskala",
-      Kampus:"Inderaputera",
-      Aktiviti:"Simulasi Metropoli",
-      Kumpulan:"Faiz • Harith • Danish • Arman",
-      Sifat:"Tenang • Analitikal • Berhemat"
-    }
-  },
-
-  {
-    name:"Hakim Aiman bin Rosli",
-    short:"Hakim",
-    category:"student",
-    role:"Rakan Universiti Lama",
-    image:"assets/characters/hakim-aiman.png",
-    quote:"Kalau peluang besar datang, aku takkan pura-pura tak nampak.",
-    description:
-      "Rakan Faiz sebelum Niskala. Hakim pernah bergurau bahawa dia akan meninggalkan universitinya jika diberi peluang memasuki Niskala.",
-    details:{
-      Umur:"21",
-      Status:"Mahasiswa Universiti",
-      Institusi:"Universiti lama Faiz",
-      Hubungan:"Rakan Faiz",
-      Sifat:"Ramah • Banyak cakap • Spontan",
-      Pengetahuan:"Mengenali reputasi Niskala",
-      Catatan:"Sering mempersoalkan perangai Faiz"
-    }
-  },
-
-  {
-    name:"Iqbal Haziq bin Zulkarnain",
-    short:"Iqbal",
-    category:"student",
-    role:"Rakan Universiti Lama",
-    image:"assets/characters/iqbal-haziq.png",
-    quote:"Kadang-kadang nama besar lebih menakutkan daripada perkara yang kita benar-benar faham.",
-    description:
-      "Seorang lagi rakan Faiz sebelum Niskala. Iqbal antara individu yang memperkenalkan perbualan tentang reputasi Niskala sebelum Faiz menerima surat.",
-    details:{
-      Umur:"21",
-      Status:"Mahasiswa Universiti",
-      Institusi:"Universiti lama Faiz",
-      Hubungan:"Rakan Faiz",
-      Sifat:"Rasional • Tenang • Pemerhati",
-      Catatan:"Mengenali reputasi alumni Niskala"
-    }
-  },
-
-  {
-    name:"Mia Adalika binti Zulkifli",
-    short:"Mia",
-    category:"student",
-    role:"Mahasiswa • Niskala",
-    image:"assets/characters/mia-adalika.png",
-    quote:"Peraturan wujud supaya manusia tidak hilang arah apabila keadaan mula retak.",
-    description:
-      "Seorang pelajar yang tegas, tersusun dan memiliki aura kepimpinan yang kuat. Mia melihat dunia dengan disiplin, tanggungjawab dan ketepatan yang sukar dipertikaikan.",
-    details:{
-      Umur:"21",
-      Status:"Pelajar Niskala",
-      Institusi:"Niskala",
-      Sifat:"Tegas • Berdisiplin • Berwibawa",
-      Pemerhatian:"Memiliki aura kepimpinan yang kuat"
-    }
-  },
-
-  {
-    name:"Azlina Nadia binti Rahman",
-    short:"Azlina",
-    category:"staff",
-    role:"Staf Akademik • Fakulti Ekonomi",
-    image:"assets/characters/azlina-nadia.png",
-    quote:"Kadangkala, yang kita mahu hanya kepastian, bukan janji kosong.",
-    description:
-      "Azlina kelihatan yakin dan profesional, namun di sebalik ketegasan itu dia juga rapuh apabila melibatkan perasaan. Dia tahu apa yang dimahukan dan tidak lagi mahu berada dalam hubungan yang samar tanpa arah.",
-    details:{
-      Umur:"34",
-      Status:"Staf Akademik",
-      Institusi:"Fakulti Ekonomi",
-      Sifat:"Matang • Ekspresif • Tegas • Realistik",
-      Hubungan:"Terlibat dalam hubungan sulit dengan Dr. Zafran",
-      Catatan:"Mencari kepastian dan tidak mahu dipermainkan"
-    }
-  }
-
-];
-
-
-/* =========================
-   CAMPUS DATABASE
-   ========================= */
-
-const campusInfo = {
-
-  Tuah:{
-    rank:"01",
-    image:"assets/campuses/posters/tuah-banner.png",
-    logo:"assets/campuses/tuah-logo.png",
-    identiti:"Merah darah • Lambang matahari",
-    description:
-      "Tuah berada di kedudukan pertama dalam ranking semasa Mata Niskala. Kedudukan yang tinggi memberikan kampus akses kepada peruntukan dan kemudahan yang lebih baik."
-  },
-
-  Mahawangsa:{
-    rank:"02",
-    image:"assets/campuses/posters/mahawangsa-banner.png",
-    logo:"assets/campuses/mahawangsa-logo.png",
-    identiti:"Biru malam • Lambang sayap",
-    description:
-      "Kampus Faiz, Harith dan Danish. Mahawangsa kini berada di tempat kedua dan mempunyai kemudahan yang selesa termasuk kafeteria dengan pilihan makanan yang luas."
-  },
-
-  Inderaputera:{
-    rank:"03",
-    image:"assets/campuses/posters/inderaputera-banner.png",
-    logo:"assets/campuses/inderaputera-logo.png",
-    identiti:"Ungu diraja • Lambang kompas",
-    description:
-      "Inderaputera berada di tengah-tengah kedudukan semasa Niskala. Nadhira merupakan antara pelajar kampus ini."
-  },
-
-  Malim:{
-    rank:"04",
-    image:"assets/campuses/posters/malim-banner.png",
-    logo:"assets/campuses/malim-logo.png",
-    identiti:"Hijau hutan • Lambang pohon",
-    description:
-      "Malim berada di kedudukan keempat. Faiz mula menyedari kesan ranking apabila melihat beberapa kemudahan Malim menunggu penyelenggaraan serta pilihan makanan yang lebih terhad."
-  },
-
-  Sulung:{
-    rank:"05",
-    image:"assets/campuses/posters/sulung-banner.png",
-    logo:"assets/campuses/sulung-logo.png",
-    identiti:"Hitam gangsa • Lambang nyala daun",
-    description:
-      "Sulung berada di kedudukan kelima. Kemudahan asas masih disediakan, tetapi beberapa akses, penyelenggaraan dan pilihan tambahan lebih terhad berbanding kampus berkedudukan tinggi."
-  }
-
-};
-
-
-/* =========================
-   RENDER CHARACTERS
-   ========================= */
-
-const characterGrid =
-document.getElementById("characterGrid");
-
-const search =
-document.getElementById("characterSearch");
-
-let currentFilter = "all";
-
-
-function renderCharacters(){
-
-  const query =
-  search.value.toLowerCase();
-
-  characterGrid.innerHTML = "";
-
-  const filtered =
-  characters.filter(character => {
-
-    const matchesCategory =
-      currentFilter === "all" ||
-      character.category === currentFilter;
-
-    const matchesSearch =
-      character.name.toLowerCase().includes(query) ||
-      character.role.toLowerCase().includes(query) ||
-      character.description.toLowerCase().includes(query);
-
-    return matchesCategory && matchesSearch;
-
-  });
-
-
-  filtered.forEach(character=>{
-
-    const card =
-    document.createElement("article");
-
-    card.className = "character";
-    card.tabIndex = 0;
-    card.setAttribute("role","button");
-    card.setAttribute("aria-label",`Buka profil ${character.name}`);
-
-    card.innerHTML = `
-      <div class="character-image">
-        <img
-          src="${character.image}"
-          alt="Potret ${character.name}"
-          loading="lazy"
-          decoding="async"
-        >
+  /* ---------- Kampus ---------- */
+  $("#campusGrid").innerHTML = CAMPUSES.map(c => `
+    <button class="campus" style="--c:${c.color}" data-campus="${esc(c.id)}" aria-label="Buka profil Kampus ${esc(c.id)}">
+      <div class="campus-media"><img src="${c.banner}" alt="Panji Kampus ${esc(c.id)}" loading="lazy" decoding="async" width="720" height="1080"></div>
+      <div class="campus-body">
+        <div class="campus-rank">KEDUDUKAN ${String(c.rank).padStart(2,"0")}</div>
+        <h3>${esc(c.id.toUpperCase())}</h3>
+        <p>${esc(c.tagline)}</p>
       </div>
+    </button>`).join("");
 
-      <div class="character-content">
-        <div class="character-role">
-          ${character.role}
-        </div>
+  /* ---------- Ranking Mata ---------- */
+  const max = Math.max(...CAMPUSES.map(c => c.score));
+  $("#ranks").innerHTML = CAMPUSES.map(c => `
+    <div class="rank-row" style="--c:${c.color}">
+      <span class="rank-no">0${c.rank}</span>
+      <img src="${c.logo}" alt="" loading="lazy" width="34" height="34">
+      <span class="rank-name">${esc(c.id)}</span>
+      <div class="bar"><i data-w="${(c.score / max * 100).toFixed(1)}%"></i></div>
+      <span class="score" data-score="${c.score}">0</span>
+    </div>`).join("");
 
-        <h3>
-          ${character.name}
-        </h3>
-
-        <p>
-          ${character.description}
-        </p>
-
-        <div class="character-footer">
-          BUKA DOSSIER →
-        </div>
-      </div>
-    `;
-
-    card.addEventListener(
-      "click",
-      ()=>openCharacter(character)
-    );
-
-    card.addEventListener("keydown",event=>{
-      if(event.key === "Enter" || event.key === " "){
-        event.preventDefault();
-        openCharacter(character);
-      }
-    });
-
-    characterGrid.appendChild(card);
-
-  });
-
-}
-
-
-renderCharacters();
-
-
-/* =========================
-   SEARCH + FILTER
-   ========================= */
-
-search.addEventListener(
-  "input",
-  renderCharacters
-);
-
-document
-.querySelectorAll(".filter-btn")
-.forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    document
-    .querySelectorAll(".filter-btn")
-    .forEach(btn=>
-      btn.classList.remove("active")
-    );
-
-    button.classList.add("active");
-
-    currentFilter =
-      button.dataset.filter;
-
-    renderCharacters();
-
-  });
-
-});
-
-
-/* =========================
-   CHARACTER MODAL
-   ========================= */
-
-function openCharacter(character){
-
-  const modalBox =
-  document.querySelector(".modal-box");
-
-  modalBox.classList.add("has-image");
-
-  const modalImage =
-  document.getElementById("modalImage");
-
-  modalImage.src = character.image;
-  modalImage.alt = `Dossier visual ${character.name}`;
-
-  const modalQuote =
-  document.getElementById("modalQuote");
-
-  modalQuote.textContent = `“${character.quote}”`;
-  modalQuote.hidden = false;
-
-  document
-  .getElementById("modalRole")
-  .textContent =
-  character.role;
-
-  document
-  .getElementById("modalName")
-  .textContent =
-  character.name;
-
-  document
-  .getElementById("modalDescription")
-  .textContent =
-  character.description;
-
-
-  const details =
-  document.getElementById("modalDetails");
-
-  details.innerHTML = "";
-
-
-  Object.entries(character.details)
-  .forEach(([key,value])=>{
-
-    details.innerHTML += `
-      <div class="modal-detail">
-        <small>${key}</small>
-        <span>${value}</span>
-      </div>
-    `;
-
-  });
-
-
-  document
-  .getElementById("modal")
-  .classList.add("active");
-
-  document.body.classList.add("modal-open");
-
-}
-
-
-function closeModal(){
-
-  document
-  .getElementById("modal")
-  .classList.remove("active");
-
-  document.body.classList.remove("modal-open");
-
-}
-
-
-document
-.getElementById("modal")
-.addEventListener("click",event=>{
-
-  if(event.target.id === "modal"){
-    closeModal();
+  /* ---------- Watak ---------- */
+  const SEALED = `<div class="sealed"><svg viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="2"><circle cx="50" cy="38" r="22"/><path d="M12 116c4-30 20-44 38-44s34 14 38 44"/><path d="M20 20 80 100" stroke="#8be9ff" stroke-opacity=".7"/></svg><span>REKOD VISUAL<br>DISEKAT</span></div>`;
+  const portrait = (ch, alt) => ch.image
+    ? `<img src="${ch.image}" alt="${esc(alt)}" loading="lazy" decoding="async" width="640" height="800"${ch.focus ? ` style="object-position:${ch.focus}"` : ""}>`
+    : SEALED;
+  let filter = "all";
+  const grid = $("#charGrid"), search = $("#charSearch");
+  function renderChars(){
+    const q = search.value.trim().toLowerCase();
+    const list = CHARACTERS.filter(ch =>
+      (filter === "all" || ch.category === filter) &&
+      (ch.name + " " + ch.role + " " + ch.description).toLowerCase().includes(q));
+    grid.innerHTML = list.length ? list.map(ch => `
+      <button class="char" data-char="${CHARACTERS.indexOf(ch)}" aria-label="Buka dossier ${esc(ch.name)}">
+        <div class="arch">${portrait(ch, "Potret " + ch.name)}</div>
+        <div class="char-role">${esc(ch.role)}</div>
+        <h3>${esc(ch.name)}</h3>
+        <p>${esc(ch.description)}</p>
+        <div class="char-cta">BUKA DOSSIER →</div>
+      </button>`).join("")
+      : `<p class="empty">TIADA REKOD DITEMUI DALAM ARKIB</p>`;
   }
+  search.addEventListener("input", renderChars);
+  document.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === b));
+    filter = b.dataset.filter; renderChars();
+  }));
+  renderChars();
 
-});
+  /* ---------- Bab ---------- */
+  $("#chapterGrid").innerHTML = CHAPTERS.map(c => `
+    <article class="chapter glass hud">
+      <span class="big" aria-hidden="true">${c.no}</span>
+      <small>BAB ${c.no}</small>
+      <h3>${esc(c.title)}</h3>
+      <p>${esc(c.text)}</p>
+    </article>`).join("");
 
-
-/* =========================
-   CAMPUS MODAL
-   ========================= */
-
-function showCampus(name){
-
-  const campus =
-  campusInfo[name];
-
-  document
-  .querySelector(".modal-box")
-  .classList.add("has-image");
-
-  const modalImage =
-  document.getElementById("modalImage");
-
-  modalImage.src = campus.image;
-  modalImage.alt = `Panji realistik Kampus ${name}`;
-
-  const modalQuote =
-  document.getElementById("modalQuote");
-
-  modalQuote.textContent = "";
-  modalQuote.hidden = true;
-
-  document
-  .getElementById("modalRole")
-  .textContent =
-  "KAMPUS NISKALA • KEDUDUKAN " +
-  campus.rank;
-
-  document
-  .getElementById("modalName")
-  .textContent =
-  name.toUpperCase();
-
-  document
-  .getElementById("modalDescription")
-  .textContent =
-  campus.description;
-
-  document
-  .getElementById("modalDetails")
-  .innerHTML = `
-    <div class="modal-detail">
-      <small>Kedudukan Semasa</small>
-      <span>${campus.rank}</span>
-    </div>
-
-    <div class="modal-detail">
-      <small>Sistem</small>
-      <span>Mata Niskala</span>
-    </div>
-
-    <div class="modal-detail">
-      <small>Identiti Visual</small>
-      <span>${campus.identiti}</span>
-    </div>
-
-    <div class="modal-detail">
-      <small>Aset</small>
-      <span>Panji realistik & logo berlatar telus</span>
-    </div>
-  `;
-
-  document
-  .getElementById("modal")
-  .classList.add("active");
-
-  document.body.classList.add("modal-open");
-
-}
-
-
-function openCampusFromKeyboard(event,name){
-
-  if(event.key === "Enter" || event.key === " "){
-    event.preventDefault();
-    showCampus(name);
+  /* ---------- Dossier ---------- */
+  const dlg = $("#dossier");
+  function openDossier({img, alt, focus, banner, logo, role, name, desc, quote, details}){
+    const frame = $("#dFrame");
+    frame.innerHTML = img ? `<img src="${img}" alt="${esc(alt)}"${focus ? ` style="object-position:${focus}"` : ""}>` : SEALED;
+    frame.classList.toggle("banner", !!banner);
+    const lg = $("#dLogo"); lg.hidden = !logo; if (logo) lg.src = logo;
+    $("#dRole").textContent = role;
+    $("#dName").textContent = name;
+    $("#dDesc").textContent = desc;
+    const q = $("#dQuote"); q.hidden = !quote; q.textContent = quote ? `“${quote}”` : "";
+    $("#dDetails").innerHTML = Object.entries(details).map(([k,v]) =>
+      `<div><small>${esc(k)}</small><span>${esc(v)}</span></div>`).join("");
+    dlg.showModal();
   }
-
-}
-
-
-/* =========================
-   MOBILE NAV
-   ========================= */
-
-const menuBtn =
-document.getElementById("menuBtn");
-
-const navLinks =
-document.getElementById("navLinks");
-
-
-menuBtn.addEventListener("click",()=>{
-
-  navLinks.classList.toggle("active");
-
-});
-
-
-navLinks
-.querySelectorAll("a")
-.forEach(link=>{
-
-  link.addEventListener("click",()=>{
-
-    navLinks.classList.remove("active");
-
+  grid.addEventListener("click", e => {
+    const b = e.target.closest("[data-char]"); if (!b) return;
+    const ch = CHARACTERS[b.dataset.char];
+    openDossier({img: ch.image, alt: `Dossier visual ${ch.name}`, focus: ch.focus, role: ch.role, name: ch.name,
+                 desc: ch.description, quote: ch.quote, details: ch.details});
   });
+  $("#campusGrid").addEventListener("click", e => {
+    const b = e.target.closest("[data-campus]"); if (!b) return;
+    const c = CAMPUSES.find(x => x.id === b.dataset.campus);
+    openDossier({img: c.banner, alt: `Panji Kampus ${c.id}`, banner: true, logo: c.logo,
+      role: `Kampus Niskala • Kedudukan ${String(c.rank).padStart(2,"0")}`, name: c.id.toUpperCase(),
+      desc: c.description, details: {"Kedudukan Semasa": "0" + c.rank, "Mata Kampus": fmt(c.score),
+      "Sistem": "Mata Niskala", "Identiti Visual": c.identiti}});
+  });
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 
-});
+  /* ---------- Menu mudah alih ---------- */
+  const menuBtn = $("#menuBtn"), nav = $("#navLinks");
+  menuBtn.addEventListener("click", () => {
+    const open = nav.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open);
+    menuBtn.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
+  });
+  nav.addEventListener("click", e => { if (e.target.tagName === "A"){ nav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", false); } });
 
-
-/* =========================
-   SCROLL REVEAL
-   ========================= */
-
-const observer =
-new IntersectionObserver(
-entries=>{
-
-  entries.forEach(entry=>{
-
-    if(entry.isIntersecting){
-
-      entry.target
-      .classList.add("visible");
-
+  /* ---------- Muncul semasa skrol + kiraan mata ---------- */
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function countUp(el){
+    const end = +el.dataset.score;
+    if (still){ el.textContent = fmt(end); return; }
+    const t0 = performance.now(), dur = 1600;
+    (function tick(t){
+      const p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(end * e));
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    en.target.classList.add("in");
+    if (en.target.id === "mata"){
+      en.target.querySelectorAll(".bar i").forEach(i => i.style.width = i.dataset.w);
+      en.target.querySelectorAll(".score").forEach(countUp);
     }
-
-  });
-
-},
-{
-  threshold:.1
-});
-
-
-document
-.querySelectorAll(".reveal")
-.forEach(element=>{
-
-  observer.observe(element);
-
-});
-
-
-/* =========================
-   ESC MODAL
-   ========================= */
-
-document.addEventListener(
-"keydown",
-event=>{
-
-  if(event.key === "Escape"){
-    closeModal();
-  }
-
-});
+    io.unobserve(en.target);
+  }), {threshold: .12});
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+})();
 </script>
-
 </body>
 </html>
