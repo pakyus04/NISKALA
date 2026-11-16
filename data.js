@@ -138,7 +138,7 @@ const CHARACTERS = [
 
   /* ---------- Watak baharu (rujuk 01_Kitab_Watak_dan_Latar_Niskala.md) ----------
      Penerangan sengaja tidak membocorkan rahsia plot.
-     image: null  -> paparan "Rekod visual disekat" sehingga potret dijana. */
+     image: null  -> paparan "Rekod visual disekat" jika tiada potret. */
   {
     name: "Alin Mastura binti Firdaus Ahmad", category: "student",
     role: "Mahasiswa • Inderaputera",
@@ -163,28 +163,28 @@ const CHARACTERS = [
   {
     name: "Dato' Firdaus Ahmad bin Isa", category: "other",
     role: "Alumni Mahawangsa • Firdaus Nanotek",
-    image: null,
+    image: "assets/characters/dato-firdaus.webp", focus: "50% 18%",
     description: "Pengasas Firdaus Nanotek dan alumni Mahawangsa yang berjaya. Di sebalik reputasi besar, ada sejarah perniagaan lama yang jarang dia sebut.",
     details: { Umur: "52", Status: "Pengasas Firdaus Nanotek", Alumni: "Mahawangsa", Keluarga: "Bapa kepada Alin Mastura", Sifat: "Berwibawa • Berhati-hati • Tertutup" }
   },
   {
     name: "Kelembai", category: "other",
     role: "Broker • Black Market",
-    image: null,
+    image: "assets/characters/kelembai.webp", focus: "50% 30%",
     description: "Broker bertopeng kayu di Black Market Niskala. Bercakap dalam teka-teki dan tidak pernah menjual maklumat tanpa harga yang 'setimpal'.",
     details: { Umur: "Tidak diketahui", Status: "Broker maklumat", Lokasi: "Black Market", Identiti: "Disekat", Catatan: "Tahu lebih banyak tentang Faiz daripada yang sepatutnya" }
   },
   {
     name: "Adi Hakimi", category: "student",
     role: "Mahasiswa • Tuah",
-    image: null,
+    image: "assets/characters/adi-hakimi.webp", focus: "50% 20%",
     description: "Anak orang kaya di Tuah yang angkuh dan sentiasa berkamera. Merakam apa-apa sahaja yang mungkin berguna kepadanya suatu hari nanti.",
     details: { Umur: "21", Status: "Pelajar Niskala • Tahun 3", Kampus: "Tuah", Sifat: "Angkuh • Licik • Oportunis", Tabiat: "Merakam segala-galanya" }
   },
   {
     name: "Inspektor Rozita Hamdan", category: "other",
     role: "Unit Integriti • Polis Niskala",
-    image: null,
+    image: "assets/characters/inspektor-rozita.webp", focus: "50% 15%",
     description: "Pegawai Unit Integriti Polis Niskala. Tenang, tajam, dan lebih suka memerhati dari jauh sebelum bertindak.",
     details: { Status: "Inspektor", Unit: "Unit Integriti Polis Niskala", Sifat: "Tenang • Tajam • Teliti" }
   }
