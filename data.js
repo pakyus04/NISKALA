@@ -190,8 +190,13 @@ const CHARACTERS = [
   }
 ];
 
+/* Tajuk bab sahaja. Ringkasan setiap bab berada di bab/bab-XX.html
+   (dijana oleh Alat_Website/build_bab.py) supaya tiada spoiler di laman utama. */
 const CHAPTERS = [
-  { no: "01", title: "Pemerhatian", text: "Kehidupan biasa Faiz berubah apabila satu ujian mengejut membawa Dr. Zafran kepada nama yang sudah lama berada dalam pemerhatian Niskala." },
-  { no: "02", title: "Ketibaan", text: "Faiz menaiki bas tanpa mengetahui lokasi sebenar Niskala sebelum ditempatkan di Mahawangsa dan bertemu Harith serta Danish." },
-  { no: "03", title: "Cara Melihat", text: "Simulasi Metropoli mula menunjukkan cara Faiz melihat masalah, sementara sistem Mata Niskala memperlihatkan kesannya terhadap lima kampus." }
+  "Kertas Kosong", "Lima Rumah", "Naik, Bukan Turun", "Harga Sepinggan Ayam",
+  "Oh My Bini", "Bilik Sakit", "KAVIKA", "Gelang Hitam",
+  "Lampu Limpah", "Tangkap", "Soal Siasat", "Jejak Terakhir Haziqah",
+  "Pembeli dan Penjual", "Dato' Firdaus", "Kelembai", "Keterangan",
+  "Misi Haziqah", "Malas", "Tuah", "Safuan",
+  "Bukti Terakhir", "Segalanya Terungkap", "Senyuman", "Epilog: Piala Maharana"
 ];

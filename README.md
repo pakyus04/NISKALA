@@ -4,6 +4,7 @@ Laman dunia novel *Niskala*: sejarah, lima kampus, sistem Mata Niskala, watak, B
 
 - `index.html` — reka letak dan gaya (kayangan + futuristik), tanpa framework.
 - `data.js` — **kemas kini fail ini sahaja** untuk menambah watak, mengubah ranking kampus atau bab baharu.
-- `assets/` — imej WebP termampat (~1.4MB keseluruhan).
+- `bab/bab-01.html` … `bab-24.html` — ringkasan setiap bab, satu halaman bagi setiap bab supaya pembaca tidak terbaca bab seterusnya.
+- `assets/` — imej WebP termampat.
 
 Watak dengan `image: null` dipaparkan sebagai "Rekod visual disekat" sehingga potret disediakan di `assets/characters/`.
